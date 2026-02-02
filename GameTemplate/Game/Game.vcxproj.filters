@@ -10,6 +10,9 @@
     <Filter Include="Effect">
       <UniqueIdentifier>{86e668c2-3e61-4f60-b959-777462bf0f82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{eac9ab2d-4cc3-4a60-a519-0af61e602694}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -23,6 +26,12 @@
     </ClCompile>
     <ClCompile Include="Effect\GameEffectManager.cpp">
       <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\LerpTimer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\StopWatch.cpp">
+      <Filter>Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +51,12 @@
     </ClInclude>
     <ClInclude Include="Effect\Types.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\LerpTimer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\StopWatch.h">
+      <Filter>Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

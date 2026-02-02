@@ -233,6 +233,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="Timer\LerpTimer.cpp" />
+    <ClCompile Include="Timer\StopWatch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect\GameEffectManager.h" />
@@ -242,6 +244,8 @@
     <ClInclude Include="Sound\Types.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="Timer\LerpTimer.h" />
+    <ClInclude Include="Timer\StopWatch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
