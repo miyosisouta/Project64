@@ -223,6 +223,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Effect\GameEffectManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sound\SoundManager.cpp" />
@@ -234,6 +235,8 @@
     <ClCompile Include="system\system.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Effect\GameEffectManager.h" />
+    <ClInclude Include="Effect\Types.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Sound\SoundManager.h" />
     <ClInclude Include="Sound\Types.h" />

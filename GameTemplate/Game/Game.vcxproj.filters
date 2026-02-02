@@ -7,6 +7,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{1a50001f-d715-4f25-8a9a-39f37b5fba91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{86e668c2-3e61-4f60-b959-777462bf0f82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -17,6 +20,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Sound\SoundManager.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\GameEffectManager.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +36,12 @@
     </ClInclude>
     <ClInclude Include="Sound\SoundManager.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\GameEffectManager.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Types.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

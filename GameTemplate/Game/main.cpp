@@ -33,8 +33,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
 
+
+	// 生成
+	SoundManager::CreateInstance();		// SoundManagerのインスタンスを作成
+	auto* gameEffectManager = NewGO<GameEffectObject>(10, "gameEffectObject");	// GameEffectManager用のオブジェクトを作成
+
+
+
 	//Gameクラスのオブジェクトを作成。
 	NewGO<Game>(0, "game");
+
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
@@ -49,6 +57,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		K2Engine::GetInstance()->Execute();
 	}
 
+
+	// 生成したオブジェクトの削除
+	{
+		// シングルトンクラスの破棄
+		{
+			SoundManager::Get().DestroyInstance();	// SoundManagerのインスタンスを破棄
+		}
+		
+		// オブジェクトの削除
+		{
+			DeleteGO(gameEffectManager);
+		}
+	}
 	K2Engine::DeleteInstance();
 
 #ifdef _DEBUG
