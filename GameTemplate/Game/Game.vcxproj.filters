@@ -13,6 +13,9 @@
     <Filter Include="Timer">
       <UniqueIdentifier>{eac9ab2d-4cc3-4a60-a519-0af61e602694}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fade">
+      <UniqueIdentifier>{6f2312d1-4cb4-4f2b-80dd-aa23d632337f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -32,6 +35,18 @@
     </ClCompile>
     <ClCompile Include="Timer\StopWatch.cpp">
       <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade\ColorFade.cpp">
+      <Filter>Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade\Loading.cpp">
+      <Filter>Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade\TransitionFade.cpp">
+      <Filter>Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade\FadeManager.cpp">
+      <Filter>Fade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +72,18 @@
     </ClInclude>
     <ClInclude Include="Timer\StopWatch.h">
       <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade\ColorFade.h">
+      <Filter>Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade\Loading.h">
+      <Filter>Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade\TransitionFade.h">
+      <Filter>Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade\FadeManager.h">
+      <Filter>Fade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

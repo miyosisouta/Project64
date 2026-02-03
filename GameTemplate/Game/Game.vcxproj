@@ -224,6 +224,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Effect\GameEffectManager.cpp" />
+    <ClCompile Include="Fade\ColorFade.cpp" />
+    <ClCompile Include="Fade\FadeManager.cpp" />
+    <ClCompile Include="Fade\Loading.cpp" />
+    <ClCompile Include="Fade\TransitionFade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sound\SoundManager.cpp" />
@@ -239,6 +243,10 @@
   <ItemGroup>
     <ClInclude Include="Effect\GameEffectManager.h" />
     <ClInclude Include="Effect\Types.h" />
+    <ClInclude Include="Fade\ColorFade.h" />
+    <ClInclude Include="Fade\FadeManager.h" />
+    <ClInclude Include="Fade\Loading.h" />
+    <ClInclude Include="Fade\TransitionFade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Sound\SoundManager.h" />
     <ClInclude Include="Sound\Types.h" />
