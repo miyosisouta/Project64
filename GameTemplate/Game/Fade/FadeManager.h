@@ -4,23 +4,24 @@
  * 生成、指示、更新、破棄を行う
  */
 #pragma once
+#include "TransitionFade.h"
 
-class TransitionFade;
 class FadeManager
 {
+public:
 	struct FadeType 
 	{
 		enum Enum
 		{
-			enFadeType_Color,					//!< カラーフェードタイプ
-			enFadeType_Loading,					//!< ローディングフェードタイプ
-			enFadeType_Max,						//!< フェードタイプの最大数
-			enFadeType_Invalid = 0xffffffff,	//!< フェードタイプなし
+			enFadeType_Invalid = -1,		//!< フェードタイプなし
+			enFadeType_Color,				//!< カラーフェードタイプ
+			enFadeType_Loading,				//!< ローディングフェードタイプ
+			enFadeType_Max,					//!< フェードタイプの最大数
 		};
 	};
 
 private:
-	TransitionFade* currentFade_ = nullptr;	//!< 現在のフェードイン・アウトクラスのポインタ
+	TransitionFade* currentFade_;	//!< 現在のフェードイン・アウトクラスのポインタ
 	FadeType::Enum currentFadeType_ = FadeType::enFadeType_Invalid; //!< 現在のフェードタイプ
 
 public:
@@ -43,11 +44,18 @@ public:
 	 * フェードの再生 
 	 * フェードを使いたいときはこれを呼ぶ
 	 */
-	void PlayFade(FadeType::Enum type, TransitionFade::FadeMode mode, float fadeTime, Vector3 color);
+	void PlayFade(FadeType::Enum type, TransitionFade::FadeMode mode, float fadeTime, Vector3 color,float waitTime = 0.0f);
 
 public:
 	TransitionFade* GetCurrentFade() { return currentFade_; } //!< 現在のフェードクラスを取得
+	TransitionFade::FadeMode GetCurrentFadeMode() { return currentFade_->GetFadeMode(); } //!< 現在のフェードタイプを取得
 	
+
+public:
+	/* フェード待ち状態か */
+	bool IsFadeWaitState() const;
+
+
 	/******************************************** シングルトン *****************************************************/
 
 

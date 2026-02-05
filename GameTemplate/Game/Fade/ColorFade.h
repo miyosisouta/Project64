@@ -19,10 +19,6 @@ public:
 	/* 描画処理 */
 	void Render(RenderContext& rc) override;
 	/* フェードを開始と開始のための設定 */
-	void PlayFade(FadeMode mode, float fadeTime, Vector3 color) override; //!< フェードを始める前の設定
-
-
-private:
-	void InitFadeSprite();
+	void PlayFade(FadeMode mode, float fadeTime, Vector3 color, float waitTime = 0.0f) override; //!< フェードを始める前の設定
 };
 

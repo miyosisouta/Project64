@@ -34,31 +34,31 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//////////////////////////////////////
 
 
-	// 生成
+	/***************** 生成 *****************/ 
+
 	SoundManager::CreateInstance();		// SoundManagerのインスタンスを作成
-	auto* gameEffectManager = NewGO<GameEffectObject>(10, "gameEffectObject");	// GameEffectManager用のオブジェクトを作成
-
-
-
-	//Gameクラスのオブジェクトを作成。
-	NewGO<Game>(0, "game");
+	auto* gameEffectManager = NewGO<GameEffectObject>(CreateClassPriority::Enum::GameEffectManager, "gameEffectObject");	// GameEffectManager用のオブジェクトを作成
+	auto* fadeManagerObject = NewGO<FadeManagerObject>(CreateClassPriority::Enum::FadeManager, "fadeManagerObject");	// FadeManager用のオブジェクトを作成
+	auto* sceneManagerObject = NewGO<SceneManagerObject>(CreateClassPriority::Enum::SceneManager, "sceneManagerObject"); // SceneManager用のオブジェクトを作成
 
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
 	
-	// ここからゲームループ。
+	/***************** ゲームループ *****************/
 	while (DispatchWindowMessage())
 	{
-		if (g_pad[0]->IsTrigger(enButtonA) ){
-			g_pad[0]->SetVibration(/*durationSec=*/0.5f, /*normalizedPower=*/1.0f);
+		if (SceneManager::Get().IsAvailable()) 
+		{
+			SceneManager::Get().Update();
 		}
+
 		K2Engine::GetInstance()->Execute();
 	}
 
 
-	// 生成したオブジェクトの削除
+	/***************** 生成したものの破棄 *****************/
 	{
 		// シングルトンクラスの破棄
 		{
@@ -68,6 +68,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		// オブジェクトの削除
 		{
 			DeleteGO(gameEffectManager);
+			DeleteGO(fadeManagerObject);
+			DeleteGO(sceneManagerObject);
 		}
 	}
 	K2Engine::DeleteInstance();

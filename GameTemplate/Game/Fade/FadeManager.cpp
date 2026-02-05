@@ -15,7 +15,7 @@ FadeManager* FadeManager::instance_ = nullptr; //初期化
 
 FadeManager::FadeManager()
 {
-
+	
 }
 
 FadeManager::~FadeManager()
@@ -29,12 +29,17 @@ FadeManager::~FadeManager()
 void FadeManager::Update()
 {
 	// 現在のフェードクラスが存在する場合
-	if (currentFade_) {	currentFade_->Update(); } // 現在のフェードクラスの更新
+	if (currentFade_) {
+		currentFade_->Update(); 
+	} // 現在のフェードクラスの更新
 }
 void FadeManager::Render(RenderContext& rc)
 {
-	// 現在のフェードクラスが存在する場合
-	if (currentFade_) {	currentFade_->Render(rc); }// 現在のフェードクラスの描画
+	// 現在のフェードクラスが存在する場合、// 現在のフェードクラスの描画
+	if (currentFade_)
+	{
+		currentFade_->Render(rc);
+	}
 }
 
 
@@ -56,7 +61,7 @@ void FadeManager::CreateFade(FadeType::Enum type)
 }
 
 
-void FadeManager::PlayFade(FadeType::Enum type, TransitionFade::FadeMode mode, float fadeTime, Vector3 color)
+void FadeManager::PlayFade(FadeType::Enum type, TransitionFade::FadeMode mode, float fadeTime, Vector3 color, float waitTime)
 {
 	// タイプが変わった、または現在のフェードクラスが存在しない場合
 	{
@@ -76,9 +81,19 @@ void FadeManager::PlayFade(FadeType::Enum type, TransitionFade::FadeMode mode, f
 	// フェードの設定
 	{
 		if (currentFade_) {
-			currentFade_->PlayFade(mode, fadeTime, color);
+			currentFade_->PlayFade(mode, fadeTime, color,waitTime);
 		}
 	}
+}
+
+bool FadeManager::IsFadeWaitState() const
+{
+	// フェードが存在し、かつ Waitモードなら true
+	if (currentFade_ && currentFade_->GetFadeMode() == TransitionFade::FadeMode::FadeWait)
+	{
+		return true;
+	}
+	return false;
 }
 
 
