@@ -10,7 +10,7 @@ namespace
 }
 
 TransitionFade::TransitionFade()
-	: fadeTimer(new LerpTimer()) // ★重要：タイマーの実体化
+	: fadeTimer(new LerpTimer()) // タイマーの実体化
 {
 }
 
@@ -32,7 +32,7 @@ void TransitionFade::Update()
 	// モードチェンジが必要かどうかフラグ
     bool isModeChange = (progress >= MAX_ALPHA);
 
-	// 送信するアルファ値
+	// 送信するアルファ値を定義・初期化
 	float sendToAlpha = TIME_ZERO;
 
 
@@ -64,7 +64,7 @@ void TransitionFade::Update()
         {
         case FadeMode::FadeOut:
             // フェードアウト完了時
-            if (fadeData_.waitTime > TIME_ZERO)
+            if (FadeManager::Get().GetCurrentFade()->fadeData_.waitTime > TIME_ZERO)
             {
                 // 待ち時間があるなら Wait モードへ
                 fadeData_.mode = FadeMode::FadeWait;

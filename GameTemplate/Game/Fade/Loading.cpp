@@ -17,6 +17,6 @@ void Loading::Render(RenderContext& rc)
 {
 }
 
-void Loading::PlayFade(FadeMode mode, float fadeTime, Vector3 color)
+void Loading::PlayFade(FadeMode mode, float fadeTime, Vector3 color, float waitTime)
 {
 }

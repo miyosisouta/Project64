@@ -23,8 +23,6 @@ void ColorFade::OnUpdateFade(float ratio)
 	fadeSprite_.Update(); // スプライトの更新
 }
 
-
-
 void ColorFade::Render(RenderContext& rc)
 {
 	if(isDraw_)
@@ -34,16 +32,16 @@ void ColorFade::Render(RenderContext& rc)
 	}
 }
 
-void ColorFade::PlayFade(FadeMode mode, float fadeTime, Vector3 color)
+void ColorFade::PlayFade(FadeMode mode, float fadeTime, Vector3 color, float waitTime)
 {
 	// 親クラスの処理を実行
-	TransitionFade::PlayFade(mode, fadeTime, color);
+	// フェードの設定を行う(モード,時間,色の設定)
+	TransitionFade::PlayFade(mode, fadeTime, color,waitTime);
 
 	// ここから下に派生クラス独自の処理を追加
-}
-
-void ColorFade::InitFadeSprite()
-{
-	fadeSprite_.Init("Assets/Sprite/Fade/Fade.DDS",1920,1080);
-	fadeSprite_.SetMulColor(Vector4(fadeData_.color.x, fadeData_.color.y, fadeData_.color.z, MAX_ALPHA));
+	// スプライトの初期化
+	{
+		fadeSprite_.Init("Assets/Sprite/Fade/Fade.DDS", 1920, 1080);											// 画像の読み込み
+		fadeSprite_.SetMulColor(Vector4(fadeData_.color.x, fadeData_.color.y, fadeData_.color.z, MAX_ALPHA));	// スプライトの色を設定
+	}
 }

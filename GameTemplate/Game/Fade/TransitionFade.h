@@ -63,5 +63,7 @@ public:
 	inline bool IsDraw() { return isDraw_; }
 	/* •`‰æ‚·‚é‚©‚Ç‚¤‚© */
 	inline void SetIsDraw(const bool flag) { isDraw_ = flag; }
+	/* ƒ‚[ƒh‚Ìæ“¾ */
+	inline const FadeMode GetFadeMode() { return fadeData_.mode; }
 };
 

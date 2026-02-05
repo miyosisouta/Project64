@@ -7,5 +7,8 @@ using namespace nsK2Engine;
 
 /* ここにインクルードしたクラスはstdtx.hをインクルードしたすべてのクラスで使えるようになる */
 /* 汎用クラスの追加 */
-#include "Sound/SoundManager.h"
 #include "Effect/GameEffectManager.h"
+#include "Fade/FadeManager.h"
+#include "Sound/SoundManager.h"
+#include "Scene/SceneManager.h"
+#include "Types.h"

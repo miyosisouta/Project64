@@ -26,7 +26,7 @@ public:
 	float CalcUpdate(const float ratio = 1.0f)
 	{
 		// 再生中でなければ何もしない
-		if (!isPlay_) { return; }
+		if (!isPlay_) { return 0; }
 
 
 		// 経過時間の更新
@@ -36,7 +36,7 @@ public:
 
 
 		// もし目標時間に達したら再生終了
-		if (lerpValue <= ratio) {
+		if (lerpValue >= ratio) {
 			isPlay_ = false;
 		}
 
