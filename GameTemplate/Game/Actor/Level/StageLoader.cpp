@@ -1,0 +1,139 @@
+#include "stdafx.h"
+#include "StageLoader.h"
+#include "Actor/Gimmic/Coin.h"
+#include "Actor/Gimmic/Pipe.h"
+#include "Actor/Map/StaticObject.h"
+
+namespace 
+{
+	constexpr int PIPE_ID = 1;
+
+	/* ここから静的オブジェクトのアセットパスを設定 */
+	constexpr const char* STATIC_OBJECT_FLATGROUND = "Assets/modelData/Stage/ObjectData/Ground.tkm";
+	constexpr const char* STATIC_OBJECT_HOUSE = "Assets/modelData/Stage/ObjectData/House.tkm";
+}
+
+
+void StageLoader::LoadStage(const char* path)
+{
+	levelRender_.Init(path, [&](LevelObjectData& data) 
+		{
+			// 前方一致で判定
+			/* 静的オブジェクトの生成 */
+			if (data.ForwardMatchName(L"Ground"))
+			{
+				staticObject_ = NewGO<StaticObject>(0, "Ground");
+				staticObject_->GetModelRender().Init(STATIC_OBJECT_FLATGROUND);
+				staticObject_->GetTransform()->m_localPosition = data.position;
+				staticObject_->GetTransform()->m_localRotation = data.rotation;
+				staticObject_->GetTransform()->m_localScale = data.scale;
+				staticObject_->GetTransform()->UpdateTransform();
+				staticObjectList_.push_back(staticObject_);
+				return false;
+			}
+			if (data.ForwardMatchName(L"House"))
+			{
+				staticObject_ = NewGO<StaticObject>(0, "house");
+				staticObject_->GetModelRender().Init(STATIC_OBJECT_HOUSE);
+				staticObject_->GetTransform()->m_localPosition = data.position;
+				staticObject_->GetTransform()->m_localRotation = data.rotation;
+				staticObject_->GetTransform()->m_localScale = data.scale;
+				staticObject_->GetTransform()->UpdateTransform();
+				staticObjectList_.push_back(staticObject_);
+				return false;
+			}
+
+			/* 動的オブジェクトの生成 */
+
+			/* 土管 */
+			else if (data.ForwardMatchName(L"Pipe01"))
+			{
+				pipe_ = NewGO<Pipe>(0,"pipe");
+				pipe_->GetTransform()->m_localPosition = data.position;
+				pipe_->GetTransform()->m_localRotation = data.rotation;
+				pipe_->GetTransform()->m_localScale = data.scale;
+				pipe_->SetId(PIPE_ID);
+				pipe_->GetTransform()->UpdateTransform();
+				pipeList_.push_back(pipe_);
+				return false;
+			}
+
+			/* 青コイン */
+			else if (data.ForwardMatchName(L"BlueCoin"))
+			{
+				blueCoin_ = NewGO<BlueCoin>(0, "blueCoin");
+				blueCoin_->GetTransform()->m_localPosition = data.position;
+				blueCoin_->GetTransform()->m_localRotation = data.rotation;
+				blueCoin_->GetTransform()->m_localScale = data.scale;
+				blueCoin_->GetTransform()->UpdateTransform();
+				blueCoinList_.push_back(blueCoin_);
+				return false;
+			}
+
+			/* 赤コイン */
+			else if (data.ForwardMatchName(L"RedCoin"))
+			{
+				redCoin_ = NewGO<RedCoin>(0, "redCoin");
+				redCoin_->GetTransform()->m_localPosition = data.position;
+				redCoin_->GetTransform()->m_localRotation = data.rotation;
+				redCoin_->GetTransform()->m_localScale = data.scale;
+				redCoin_->GetTransform()->UpdateTransform();
+				redCoinList_.push_back(redCoin_);
+				return false;
+			}
+
+			/* 黄コイン */
+			else if (data.ForwardMatchName(L"YellowCoin"))
+			{
+				yellowCoin_ = NewGO<YellowCoin>(0, "yellowCoin");
+				yellowCoin_->GetTransform()->m_localPosition = data.position;
+				yellowCoin_->GetTransform()->m_localRotation = data.rotation;
+				yellowCoin_->GetTransform()->m_localScale = data.scale;
+				yellowCoin_->GetTransform()->UpdateTransform();
+				yellowCoinList_.push_back(yellowCoin_);
+				return false;
+			}
+		});
+}
+
+void StageLoader::UnloadStage()
+{
+	/* 静的オブジェクト */
+	for (auto& staticObject : staticObjectList_){ DeleteGO(staticObject);}
+	staticObjectList_.clear();
+
+	/* 土管 */
+	for (auto& pipe : pipeList_){ DeleteGO(pipe);}
+	pipeList_.clear();
+
+	/* 青コイン*/
+	for (auto& blueCoin : blueCoinList_){ DeleteGO(blueCoin);}
+	blueCoinList_.clear();
+
+	/* 赤コイン */
+	for (auto& redCoin : redCoinList_){	DeleteGO(redCoin);}
+	redCoinList_.clear();
+
+	/* 黄コイン */
+	for (auto& yellowCoin : yellowCoinList_){ DeleteGO(yellowCoin);}
+	yellowCoinList_.clear();
+
+}
+
+StageLoader::StageLoader()
+{
+}
+
+StageLoader::~StageLoader()
+{
+	UnloadStage();
+}
+
+void StageLoader::Update()
+{
+}
+
+void StageLoader::Render(RenderContext& rc)
+{
+	
+}

@@ -94,6 +94,7 @@ void SceneManager::ExecuteSceneChange()
 		}
 		// ‰Šú‰»ˆ—
 		currentScene_->Enter();
+		nextSceneMode_ = SceneMode::None;
 	}
 }
 

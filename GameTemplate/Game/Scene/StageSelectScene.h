@@ -5,9 +5,13 @@
  */
 #include "IScene.h"
 
-
+class StageSelect;
 class StageSelectScene : public IScene
 {
+private:
+	StageSelect* stageSelect_ = nullptr;
+
+
 public:
 	StageSelectScene();
 	~StageSelectScene();

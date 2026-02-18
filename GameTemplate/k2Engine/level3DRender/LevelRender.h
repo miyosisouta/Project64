@@ -17,7 +17,7 @@ namespace nsK2Engine {
 		const wchar_t* name;	//!<名前。
 		int number = 0;
 		/*!
-		* @brief	引数で渡したオブジェクト名のオブジェクトか調べる。
+		* @brief	引数で渡したオブジェクト名のオブジェクトか調べる。「完全一致」。
 		*@param[in]	objName		調べる名前。
 		*@return	名前が同じ場合にtrueを返します。
 		*/
@@ -26,7 +26,7 @@ namespace nsK2Engine {
 			return wcscmp(objName, name) == 0;
 		}
 		/*!
-		* @brief	名前が前方一致するか調べる。
+		* @brief	名前が「前方一致」するか調べる。
 		*/
 		bool ForwardMatchName(const wchar_t* n)
 		{
