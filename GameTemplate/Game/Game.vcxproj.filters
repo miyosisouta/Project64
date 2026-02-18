@@ -19,6 +19,21 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{39d21760-a852-4d03-bc4b-44784b09bc74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{7e999ff4-4272-4444-b7fc-0000dbf40ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Level">
+      <UniqueIdentifier>{c02b0a84-de43-4780-934e-dfbed2a32a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Gimmic">
+      <UniqueIdentifier>{31a0331f-d0fa-4a3b-bbef-e3b6eab64942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{989cb8b8-9565-4180-886c-d69757e0d34c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map">
+      <UniqueIdentifier>{652329b4-4886-4dcf-950f-ce154bfb3463}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -65,6 +80,40 @@
     </ClCompile>
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Level\BossStage.cpp">
+      <Filter>Actor\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Level\NormalStage.cpp">
+      <Filter>Actor\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Level\StageBase.cpp">
+      <Filter>Actor\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Level\StageLoader.cpp">
+      <Filter>Actor\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Level\TutorialStage.cpp">
+      <Filter>Actor\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="UserData.cpp" />
+    <ClCompile Include="Actor\Gimmic\Coin.cpp">
+      <Filter>Actor\Gimmic</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Gimmic\Pipe.cpp">
+      <Filter>Actor\Gimmic</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Transform.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Map\StaticObject.cpp">
+      <Filter>Actor\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Level\StageSelect.cpp">
+      <Filter>Actor\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,5 +168,39 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Types.h" />
+    <ClInclude Include="Actor\Level\BossStage.h">
+      <Filter>Actor\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Level\NormalStage.h">
+      <Filter>Actor\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Level\StageBase.h">
+      <Filter>Actor\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Level\StageLoader.h">
+      <Filter>Actor\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Level\TutorialStage.h">
+      <Filter>Actor\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="UserData.h" />
+    <ClInclude Include="Actor\Gimmic\Coin.h">
+      <Filter>Actor\Gimmic</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Gimmic\Pipe.h">
+      <Filter>Actor\Gimmic</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Transform.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Map\StaticObject.h">
+      <Filter>Actor\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Level\StageSelect.h">
+      <Filter>Actor\Level</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

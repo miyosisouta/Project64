@@ -223,6 +223,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Actor.cpp" />
+    <ClCompile Include="Actor\Gimmic\Coin.cpp" />
+    <ClCompile Include="Actor\Gimmic\Pipe.cpp" />
+    <ClCompile Include="Actor\Level\BossStage.cpp" />
+    <ClCompile Include="Actor\Level\NormalStage.cpp" />
+    <ClCompile Include="Actor\Level\StageBase.cpp" />
+    <ClCompile Include="Actor\Level\StageLoader.cpp" />
+    <ClCompile Include="Actor\Level\StageSelect.cpp" />
+    <ClCompile Include="Actor\Level\TutorialStage.cpp" />
+    <ClCompile Include="Actor\Map\StaticObject.cpp" />
     <ClCompile Include="Effect\GameEffectManager.cpp" />
     <ClCompile Include="Fade\ColorFade.cpp" />
     <ClCompile Include="Fade\FadeManager.cpp" />
@@ -244,8 +254,20 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="Timer\LerpTimer.cpp" />
     <ClCompile Include="Timer\StopWatch.cpp" />
+    <ClCompile Include="UserData.cpp" />
+    <ClCompile Include="Util\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Actor\Gimmic\Coin.h" />
+    <ClInclude Include="Actor\Gimmic\Pipe.h" />
+    <ClInclude Include="Actor\Level\BossStage.h" />
+    <ClInclude Include="Actor\Level\NormalStage.h" />
+    <ClInclude Include="Actor\Level\StageBase.h" />
+    <ClInclude Include="Actor\Level\StageLoader.h" />
+    <ClInclude Include="Actor\Level\StageSelect.h" />
+    <ClInclude Include="Actor\Level\TutorialStage.h" />
+    <ClInclude Include="Actor\Map\StaticObject.h" />
     <ClInclude Include="Effect\GameEffectManager.h" />
     <ClInclude Include="Effect\Types.h" />
     <ClInclude Include="Fade\ColorFade.h" />
@@ -265,6 +287,8 @@
     <ClInclude Include="Timer\LerpTimer.h" />
     <ClInclude Include="Timer\StopWatch.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="UserData.h" />
+    <ClInclude Include="Util\Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

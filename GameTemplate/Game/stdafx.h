@@ -11,4 +11,5 @@ using namespace nsK2Engine;
 #include "Fade/FadeManager.h"
 #include "Sound/SoundManager.h"
 #include "Scene/SceneManager.h"
+#include "Util/Transform.h"
 #include "Types.h"
