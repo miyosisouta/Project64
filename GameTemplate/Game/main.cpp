@@ -4,7 +4,6 @@
 #include<InitGUID.h>
 #include<dxgidebug.h>
 
-#include "Game.h"
 
 
 
@@ -37,10 +36,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	/***************** 生成 *****************/ 
 
 	SoundManager::CreateInstance();		// SoundManagerのインスタンスを作成
+	ParameterManager::CreateInstance(); // パラメーターマネージャーを作成
 	auto* gameEffectManager = NewGO<GameEffectObject>(CreateClassPriority::Enum::GameEffectManager, "gameEffectObject");	// GameEffectManager用のオブジェクトを作成
 	auto* fadeManagerObject = NewGO<FadeManagerObject>(CreateClassPriority::Enum::FadeManager, "fadeManagerObject");	// FadeManager用のオブジェクトを作成
 	auto* sceneManagerObject = NewGO<SceneManagerObject>(CreateClassPriority::Enum::SceneManager, "sceneManagerObject"); // SceneManager用のオブジェクトを作成
-
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
@@ -63,6 +62,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		// シングルトンクラスの破棄
 		{
 			SoundManager::Get().DestroyInstance();	// SoundManagerのインスタンスを破棄
+			ParameterManager::Get().DestroyInstance(); // パラメーターマネージャーを破棄
 		}
 		
 		// オブジェクトの削除

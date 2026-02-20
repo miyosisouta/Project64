@@ -9,22 +9,29 @@ StageSelectScene::StageSelectScene()
 }
 StageSelectScene::~StageSelectScene()
 {
-	delete stageSelect_;
-	stageSelect_ = nullptr;
+	delete stage_;
+	stage_ = nullptr;
+
+	DeleteGO(player_);
+	delete camera_;
+	camera_ = nullptr;
 }
 
 void StageSelectScene::Enter()
 {
-	stageSelect_ = new StageSelect();
-	g_camera3D->SetPosition(1000.0f, 1000.0f, -2000.0f);
-	g_camera3D->SetTarget(0.0f, 0.0f, 0.0f);
-	g_camera3D->SetNear(1.0f);
-	g_camera3D->SetFar(10000.0f);
+	player_ = NewGO<Player>(0, "Player"); // プレイヤーの生成
+	controller_ = NewGO<Controller>(0, "Controller"); // コントローラーの生成
+	controller_->SetTarget(player_); // コントローラーのターゲットをプレイヤーに設定
+	camera_ = new GameCamera(); // カメラの生成
+	camera_->SetTarget(player_); // カメラのターゲットをプレイヤーに設定
+	camera_->SetUp();
+	stage_ = new StageSelect();
 }
 
 void StageSelectScene::Update()
 {
-	stageSelect_->Update();
+	stage_->Update();
+	camera_->Update();
 }
 
 void StageSelectScene::Exit()
@@ -33,5 +40,5 @@ void StageSelectScene::Exit()
 
 void StageSelectScene::Render(RenderContext& rc)
 {
-	stageSelect_->Render(rc);
+	stage_->Render(rc);
 }

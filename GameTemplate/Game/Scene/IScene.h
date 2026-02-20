@@ -3,13 +3,18 @@
  * TransitionFade.h
  * フェードの基底クラス
  */
+#include "GameCamera.h"
+#include "Actor/Character/Player/Player.h"
+#include "Actor/Character/Player/Controller.h"
 
 class LerpTimer;
 class IScene
 {
 protected:
 	LerpTimer* fadeTimer; //!< フェード用タイマー
-
+	Player* player_ = nullptr;
+	Controller* controller_ = nullptr;
+	GameCamera* camera_ = nullptr;
 
 public:
 	IScene();

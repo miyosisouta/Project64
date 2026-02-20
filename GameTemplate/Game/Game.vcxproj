@@ -224,6 +224,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Actor.cpp" />
+    <ClCompile Include="Actor\ActorStatus.cpp" />
+    <ClCompile Include="Actor\Character\Player\Controller.cpp" />
+    <ClCompile Include="Actor\Character\Player\Player.cpp" />
+    <ClCompile Include="Actor\Character\Player\PlayerState.cpp" />
+    <ClCompile Include="Actor\Character\Player\StateMashine.cpp" />
     <ClCompile Include="Actor\Gimmic\Coin.cpp" />
     <ClCompile Include="Actor\Gimmic\Pipe.cpp" />
     <ClCompile Include="Actor\Level\BossStage.cpp" />
@@ -233,12 +238,13 @@
     <ClCompile Include="Actor\Level\StageSelect.cpp" />
     <ClCompile Include="Actor\Level\TutorialStage.cpp" />
     <ClCompile Include="Actor\Map\StaticObject.cpp" />
+    <ClCompile Include="Core\ParameterManager.cpp" />
     <ClCompile Include="Effect\GameEffectManager.cpp" />
     <ClCompile Include="Fade\ColorFade.cpp" />
     <ClCompile Include="Fade\FadeManager.cpp" />
     <ClCompile Include="Fade\Loading.cpp" />
     <ClCompile Include="Fade\TransitionFade.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\InGameScene.cpp" />
     <ClCompile Include="Scene\IScene.cpp" />
@@ -259,6 +265,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Actor\ActorStatus.h" />
+    <ClInclude Include="Actor\Character\Player\Controller.h" />
+    <ClInclude Include="Actor\Character\Player\Player.h" />
+    <ClInclude Include="Actor\Character\Player\PlayerState.h" />
+    <ClInclude Include="Actor\Character\Player\StateMashine.h" />
     <ClInclude Include="Actor\Gimmic\Coin.h" />
     <ClInclude Include="Actor\Gimmic\Pipe.h" />
     <ClInclude Include="Actor\Level\BossStage.h" />
@@ -268,13 +279,15 @@
     <ClInclude Include="Actor\Level\StageSelect.h" />
     <ClInclude Include="Actor\Level\TutorialStage.h" />
     <ClInclude Include="Actor\Map\StaticObject.h" />
+    <ClInclude Include="Core\ParameterManager.h" />
     <ClInclude Include="Effect\GameEffectManager.h" />
     <ClInclude Include="Effect\Types.h" />
     <ClInclude Include="Fade\ColorFade.h" />
     <ClInclude Include="Fade\FadeManager.h" />
     <ClInclude Include="Fade\Loading.h" />
     <ClInclude Include="Fade\TransitionFade.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="json\json.hpp" />
     <ClInclude Include="Scene\InGameScene.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
@@ -288,6 +301,7 @@
     <ClInclude Include="Timer\StopWatch.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="UserData.h" />
+    <ClInclude Include="Util\Crc32.h" />
     <ClInclude Include="Util\Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
