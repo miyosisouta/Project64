@@ -34,6 +34,18 @@
     <Filter Include="Actor\Map">
       <UniqueIdentifier>{652329b4-4886-4dcf-950f-ce154bfb3463}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Character">
+      <UniqueIdentifier>{b6f5a26d-be88-492c-967a-abf62380eb94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Character\Player">
+      <UniqueIdentifier>{c28f8151-3931-42d4-914c-3a1bb07477cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{6084ac34-a5fb-4456-9c41-ba5a0858c430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{8a61bc2a-e532-4d56-aea2-3c72dc7f443e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -41,7 +53,6 @@
     <ClCompile Include="system\system.cpp">
       <Filter>system</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Sound\SoundManager.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
@@ -96,7 +107,6 @@
     <ClCompile Include="Actor\Level\TutorialStage.cpp">
       <Filter>Actor\Level</Filter>
     </ClCompile>
-    <ClCompile Include="UserData.cpp" />
     <ClCompile Include="Actor\Gimmic\Coin.cpp">
       <Filter>Actor\Gimmic</Filter>
     </ClCompile>
@@ -115,13 +125,32 @@
     <ClCompile Include="Actor\Level\StageSelect.cpp">
       <Filter>Actor\Level</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Character\Player\StateMashine.cpp">
+      <Filter>Actor\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Player\Controller.cpp">
+      <Filter>Actor\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Player\PlayerState.cpp">
+      <Filter>Actor\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Player\Player.cpp">
+      <Filter>Actor\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UserData.cpp" />
+    <ClCompile Include="Core\ParameterManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\ActorStatus.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Sound\Types.h">
       <Filter>Sound</Filter>
     </ClInclude>
@@ -183,7 +212,6 @@
     <ClInclude Include="Actor\Level\TutorialStage.h">
       <Filter>Actor\Level</Filter>
     </ClInclude>
-    <ClInclude Include="UserData.h" />
     <ClInclude Include="Actor\Gimmic\Coin.h">
       <Filter>Actor\Gimmic</Filter>
     </ClInclude>
@@ -202,5 +230,31 @@
     <ClInclude Include="Actor\Level\StageSelect.h">
       <Filter>Actor\Level</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Character\Player\Player.h">
+      <Filter>Actor\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Player\StateMashine.h">
+      <Filter>Actor\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Player\Controller.h">
+      <Filter>Actor\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Player\PlayerState.h">
+      <Filter>Actor\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UserData.h" />
+    <ClInclude Include="Core\ParameterManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Crc32.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json.hpp">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\ActorStatus.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.h" />
   </ItemGroup>
 </Project>

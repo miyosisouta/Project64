@@ -5,11 +5,13 @@
  */
 #include "IScene.h"
 
-class StageSelect;
+class GameCamera;
+class Player;
+class StageBase;
 class StageSelectScene : public IScene
 {
 private:
-	StageSelect* stageSelect_ = nullptr;
+	StageBase* stage_ = nullptr;
 
 
 public:

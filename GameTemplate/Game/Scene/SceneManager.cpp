@@ -54,7 +54,7 @@ void SceneManager::Render(RenderContext& rc)
 void SceneManager::ChangeSceneRequest(SceneMode sceneMode)
 {
 	nextSceneMode_ = sceneMode;
-	FadeManager::Get().PlayFade(FadeManager::FadeType::enFadeType_Color, TransitionFade::FadeMode::FadeOut, 5.0f, Vector3(1.0f, 1.0f, 1.0f),5.0f);
+	FadeManager::Get().PlayFade(FadeManager::FadeType::enFadeType_Color, TransitionFade::FadeMode::FadeOut, 2.5f, Vector3(1.0f, 1.0f, 1.0f),5.0f);
 }
 
 

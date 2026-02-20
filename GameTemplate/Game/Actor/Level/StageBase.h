@@ -11,12 +11,13 @@ public:
 	StageBase();
 	virtual ~StageBase();
 
+	virtual void Update();
+	virtual void Render(RenderContext& rc);
 
 protected:
 	virtual void LoadStageData() = 0;
 	virtual void UnloadStageData() = 0;
-	virtual void Update();
-	virtual void Render(RenderContext& rc);
+
 
 
 protected:

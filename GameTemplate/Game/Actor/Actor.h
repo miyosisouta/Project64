@@ -1,11 +1,11 @@
 #pragma once
-
+class ActorStatus;
 class Actor : public IGameObject
 {
 protected:
 	ModelRender model_; //!< モデルレンダー
 	Transform transform_;	  //!< トランスフォーム
-
+	ActorStatus* status_; //!< アクターステータス
 
 public:
 	/* コンストラクタ */
