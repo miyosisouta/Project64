@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Actor/Actor.h"
+#include "Actor/Gimmic/GimmicBase.h"
 
-class Coin : public Actor
+class Coin : public GimmicBase
 {
 public:
 	Coin() {};
@@ -11,6 +11,7 @@ public:
 	virtual bool Start()override { return true; };
 	virtual void Update()override {};
 	virtual void Render(RenderContext& rc)override {};
+	virtual void AddEffect() override {}
 };
 
 
@@ -23,6 +24,7 @@ public:
 	bool Start()override;
 	void Update()override;
 	void Render(RenderContext& rc)override;
+	void AddEffect() override;
 };
 
 class RedCoin : public Coin
@@ -34,6 +36,7 @@ public:
 	bool Start()override;
 	void Update()override;
 	void Render(RenderContext& rc)override;
+	void AddEffect() override;
 };
 
 class BlueCoin : public Coin
@@ -45,5 +48,6 @@ public:
 	bool Start()override;
 	void Update()override;
 	void Render(RenderContext& rc)override;
+	void AddEffect() override;
 };
 

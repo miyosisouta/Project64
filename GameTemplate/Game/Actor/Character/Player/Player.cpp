@@ -44,7 +44,7 @@ bool Player::Start()
 
 	model_.Init("Assets/modelData/Character/Player/unityChan.tkm", animationClipList_, enPlayerAnimaitonState::Max, enModelUpAxisY); // モデルの初期化
 	charaCon_.Init(GetPlayerStatus()->GetRadius(), GetPlayerStatus()->GetHeight(), transform_.m_position); // キャラクターコントローラーの初期化
-	
+	CollisionHitManager::Get().SetPlayer(this); // 当たり判定管理クラスにプレイヤーを登録
 	return true;
 }
 

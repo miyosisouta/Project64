@@ -1,15 +1,8 @@
 #pragma once
-#include "Actor/Actor.h"
+#include "Actor/Gimmic/GimmicBase.h"
 
-class Pipe : public Actor
+class Pipe : public GimmicBase
 {
-private:
-	int id_ = 0;
-
-public:
-	void SetId(int id) { id_ = id; }
-
-
 public:
 	Pipe();
 	~Pipe();

@@ -35,7 +35,6 @@ struct MasterPlayerStatusParameter : public IMasterParameter
 	uint8_t playerHealth;   // プレイヤーの体力
 };
 
-
 /** defineの使用終了 */
 #undef appParameter
 

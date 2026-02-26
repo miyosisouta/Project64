@@ -37,9 +37,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	SoundManager::CreateInstance();		// SoundManagerのインスタンスを作成
 	ParameterManager::CreateInstance(); // パラメーターマネージャーを作成
+	UserData::CreateInstance(); // ユーザーデータのインスタンスを作成
 	auto* gameEffectManager = NewGO<GameEffectObject>(CreateClassPriority::Enum::GameEffectManager, "gameEffectObject");	// GameEffectManager用のオブジェクトを作成
 	auto* fadeManagerObject = NewGO<FadeManagerObject>(CreateClassPriority::Enum::FadeManager, "fadeManagerObject");	// FadeManager用のオブジェクトを作成
 	auto* sceneManagerObject = NewGO<SceneManagerObject>(CreateClassPriority::Enum::SceneManager, "sceneManagerObject"); // SceneManager用のオブジェクトを作成
+	auto* collisionManagerObject = NewGO<CollisionHitObject>(CreateClassPriority::Enum::CollisionManager, "collisionManagerObject"); // CollisionManager用のオブジェクトを作成
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
@@ -70,6 +72,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			DeleteGO(gameEffectManager);
 			DeleteGO(fadeManagerObject);
 			DeleteGO(sceneManagerObject);
+			DeleteGO(collisionManagerObject);
 		}
 	}
 	K2Engine::DeleteInstance();

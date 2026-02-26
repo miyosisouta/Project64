@@ -27,6 +27,9 @@ public:
 	StateMashine* GetStateMashine() { return stateMashine_.get(); }
 	/* プレイヤーステータスの取得 */
 	PlayerStatus* GetPlayerStatus() { return dynamic_cast<PlayerStatus*>(status_); }
+	/* キャラコンの取得 */
+	CharacterController& GetCharaCon() { return charaCon_; }
+
 	/* プレイヤーが地面についているか取得 */
 	bool IsOnGrounded() const { return charaCon_.IsOnGround(); }
 

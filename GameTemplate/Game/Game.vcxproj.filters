@@ -46,6 +46,9 @@
     <Filter Include="json">
       <UniqueIdentifier>{8a61bc2a-e532-4d56-aea2-3c72dc7f443e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{c6bc747b-db00-41e6-8c7a-e50051464a43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -145,6 +148,12 @@
       <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="Collision\CollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Gimmic\GimmicBase.cpp">
+      <Filter>Actor\Gimmic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -256,5 +265,11 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="Collision\CollisionManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Gimmic\GimmicBase.h">
+      <Filter>Actor\Gimmic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

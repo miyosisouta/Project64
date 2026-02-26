@@ -8,18 +8,19 @@ namespace DataSetting {
 	{
 		COIN_MAX = 100,
 		COIN_MIN = 0,
+		LIFE_MAX = 8,
 	};
 }
 
 class UserData
 {
 private:
-
-
 	uint8_t remaningLifes_ = 0;					//!< 所持残機数
 	uint8_t lifes_ = 8;							//!< 所持HP
-	uint8_t coins_ = DataSetting::COIN_MIN;		//!< 所持コイン数
-	uint8_t stars_ = DataSetting::COIN_MIN;		//!< 所持スター数
+	uint8_t totalCoins_ = DataSetting::COIN_MIN;		//!< 合計所持コイン数
+	uint8_t stageCoins_ = DataSetting::COIN_MIN;		//!< ステージ所持コイン数
+	uint8_t totalStars_ = DataSetting::COIN_MIN;		//!< 合計所持スター数
+	uint8_t stageStars_ = DataSetting::COIN_MIN;		//!< ステージ所持スター数
 
 
 private:
@@ -34,21 +35,27 @@ public:
 
 	/* ゲッター */
 	inline const uint8_t GetUserDataLife()const { return remaningLifes_;} //!< ライフ
-	inline const uint8_t GetUserDataCoin()const { return coins_;} //!< コイン
-	inline const uint8_t GetUserDataStar()const { return stars_;} //!< スター
+	inline const uint8_t GetUserDataTotalCoin()const { return totalCoins_;} //!< コイン
+	inline const uint8_t GetUserDataTotalStar()const { return totalStars_;} //!< スター
 
 	/* セッター */
 	inline void SetUserDataLife(const uint8_t life) { remaningLifes_ = life; } //!< ライフ
-	inline void SetUserDataCoin(const uint8_t coin) { coins_ = coin; } //!< コイン
-	inline void SetUserDataStar(const uint8_t star) { stars_ = star; } //!< スター
+	inline void SetUserDataStageCoin(const uint8_t coin) { stageCoins_ = coin; } //!< コイン
+	inline void SetUserDataStageStar(const uint8_t star) { stageStars_ = star; } //!< スター
 
 	/* 加える */
-	void AddCoin(const uint8_t value) {	//!< ライフ
-		coins_ += value;
-		coins_ = min(coins_, DataSetting::COIN_MAX);
-		coins_ = max(coins_, DataSetting::COIN_MIN);
-	} 
-
+	/* 合計コイン数を追加 */
+	void AddTotalCoin(const uint8_t value) {
+		totalCoins_ += value;
+		totalCoins_ = min(totalCoins_, DataSetting::COIN_MAX);
+		totalCoins_ = max(totalCoins_, DataSetting::COIN_MIN);
+	}
+	/* ステージ内コインを追加 */
+	void AddStageCoin(const uint8_t value) {
+		stageCoins_ += value;
+		stageCoins_ = min(stageCoins_, DataSetting::COIN_MAX);
+		stageCoins_ = max(stageCoins_, DataSetting::COIN_MIN);
+	}
 
 
 	/******************************************** シングルトン *****************************************************/
