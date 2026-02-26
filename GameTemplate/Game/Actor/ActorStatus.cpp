@@ -16,6 +16,7 @@ PlayerStatus::PlayerStatus()
 			parameter.height = j["height"].get<float>();
 			parameter.playerHealth = j["health"].get<uint8_t>();
 		});
+
 }
 
 PlayerStatus::~PlayerStatus()

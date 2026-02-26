@@ -230,6 +230,7 @@
     <ClCompile Include="Actor\Character\Player\PlayerState.cpp" />
     <ClCompile Include="Actor\Character\Player\StateMashine.cpp" />
     <ClCompile Include="Actor\Gimmic\Coin.cpp" />
+    <ClCompile Include="Actor\Gimmic\GimmicBase.cpp" />
     <ClCompile Include="Actor\Gimmic\Pipe.cpp" />
     <ClCompile Include="Actor\Level\BossStage.cpp" />
     <ClCompile Include="Actor\Level\NormalStage.cpp" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Actor\Level\StageSelect.cpp" />
     <ClCompile Include="Actor\Level\TutorialStage.cpp" />
     <ClCompile Include="Actor\Map\StaticObject.cpp" />
+    <ClCompile Include="Collision\CollisionManager.cpp" />
     <ClCompile Include="Core\ParameterManager.cpp" />
     <ClCompile Include="Effect\GameEffectManager.cpp" />
     <ClCompile Include="Fade\ColorFade.cpp" />
@@ -271,6 +273,7 @@
     <ClInclude Include="Actor\Character\Player\PlayerState.h" />
     <ClInclude Include="Actor\Character\Player\StateMashine.h" />
     <ClInclude Include="Actor\Gimmic\Coin.h" />
+    <ClInclude Include="Actor\Gimmic\GimmicBase.h" />
     <ClInclude Include="Actor\Gimmic\Pipe.h" />
     <ClInclude Include="Actor\Level\BossStage.h" />
     <ClInclude Include="Actor\Level\NormalStage.h" />
@@ -279,6 +282,7 @@
     <ClInclude Include="Actor\Level\StageSelect.h" />
     <ClInclude Include="Actor\Level\TutorialStage.h" />
     <ClInclude Include="Actor\Map\StaticObject.h" />
+    <ClInclude Include="Collision\CollisionManager.h" />
     <ClInclude Include="Core\ParameterManager.h" />
     <ClInclude Include="Effect\GameEffectManager.h" />
     <ClInclude Include="Effect\Types.h" />

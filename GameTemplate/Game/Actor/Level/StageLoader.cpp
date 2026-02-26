@@ -6,7 +6,12 @@
 
 namespace 
 {
-	constexpr int PIPE_ID = 1;
+	constexpr uint8_t PIPE_ID_ONE = 1;
+	constexpr uint8_t PIPE_ID_TWO = 2;
+
+	constexpr uint8_t COIN_NUM_ONE = 1;
+	constexpr uint8_t COIN_NUM_TWO = 2;
+	constexpr uint8_t COIN_NUM_THREE = 3;
 
 	/* ここから静的オブジェクトのアセットパスを設定 */
 	constexpr const char* STATIC_OBJECT_FLATGROUND = "Assets/modelData/Stage/ObjectData/Ground.tkm";
@@ -46,13 +51,12 @@ void StageLoader::LoadStage(const char* path)
 			/* 動的オブジェクトの生成 */
 
 			/* 土管 */
-			else if (data.ForwardMatchName(L"Pipe01"))
+			else if (data.ForwardMatchName(L"Pipe"))
 			{
 				pipe_ = NewGO<Pipe>(0,"pipe");
 				pipe_->GetTransform()->m_localPosition = data.position;
 				pipe_->GetTransform()->m_localRotation = data.rotation;
 				pipe_->GetTransform()->m_localScale = data.scale;
-				pipe_->SetId(PIPE_ID);
 				pipe_->GetTransform()->UpdateTransform();
 				pipeList_.push_back(pipe_);
 				return false;
@@ -65,9 +69,9 @@ void StageLoader::LoadStage(const char* path)
 				blueCoin_->GetTransform()->m_localPosition = data.position;
 				blueCoin_->GetTransform()->m_localRotation = data.rotation;
 				blueCoin_->GetTransform()->m_localScale = data.scale;
-				blueCoin_->GetTransform()->UpdateTransform();
+				blueCoin_->GetTransform()->UpdateTransform();			
 				blueCoinList_.push_back(blueCoin_);
-				return false;
+				return true;
 			}
 
 			/* 赤コイン */
@@ -79,7 +83,7 @@ void StageLoader::LoadStage(const char* path)
 				redCoin_->GetTransform()->m_localScale = data.scale;
 				redCoin_->GetTransform()->UpdateTransform();
 				redCoinList_.push_back(redCoin_);
-				return false;
+				return true;
 			}
 
 			/* 黄コイン */
@@ -91,7 +95,7 @@ void StageLoader::LoadStage(const char* path)
 				yellowCoin_->GetTransform()->m_localScale = data.scale;
 				yellowCoin_->GetTransform()->UpdateTransform();
 				yellowCoinList_.push_back(yellowCoin_);
-				return false;
+				return true;
 			}
 		});
 }

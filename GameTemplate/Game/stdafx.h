@@ -7,7 +7,9 @@ using namespace nsK2Engine;
 
 /* ここにインクルードしたクラスはstdtx.hをインクルードしたすべてのクラスで使えるようになる */
 /* 汎用クラスの追加 */
+#include "UserData.h"
 #include "Core/ParameterManager.h"
+#include "Collision/CollisionManager.h"
 #include "Effect/GameEffectManager.h"
 #include "Fade/FadeManager.h"
 #include "json/json.hpp"
