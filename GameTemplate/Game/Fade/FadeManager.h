@@ -55,6 +55,7 @@ public:
 	/* フェード待ち状態か */
 	bool IsFadeWaitState() const;
 
+	bool IsFadePlay() const { return currentFade_->IsPlay(); }
 
 	/******************************************** シングルトン *****************************************************/
 

@@ -26,8 +26,8 @@ void Controller::Update()
 	{
 		playerStateMashine->SetInputA(g_pad[0]->IsPress(enButtonA));	// Aボタン入力
 		playerStateMashine->SetInputB(g_pad[0]->IsTrigger(enButtonB));	// Bボタン入力
-		playerStateMashine->SetInputX(g_pad[0]->IsPress(enButtonX));	// Xボタン入力
-		playerStateMashine->SetInputY(g_pad[0]->IsPress(enButtonY));	// Yボタン入力
+		playerStateMashine->SetInputX(g_pad[0]->IsTrigger(enButtonX));	// Xボタン入力
+		playerStateMashine->SetInputY(g_pad[0]->IsTrigger(enButtonY));	// Yボタン入力
 	}
 
 	// 左スティックの入力があるか

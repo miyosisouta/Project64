@@ -12,6 +12,7 @@ StateMashine::StateMashine()
 	stateList_[enPlayerState::Run] = new RunState(this);
 	stateList_[enPlayerState::Jump] = new JumpState(this);
 	stateList_[enPlayerState::Fall] = new FallState(this);
+	stateList_[enPlayerState::PipeWarp] = new PipeWarpState(this);
 }
 
 StateMashine::~StateMashine()
@@ -56,6 +57,15 @@ void StateMashine::ChangeState()
 
 void StateMashine::CheckChangeState()
 {
+	if (ChangeStatePipeWarp())
+	{
+		nextState_ = stateList_[enPlayerState::PipeWarp]; // 土管ワープステートに変更
+		return;
+	}
+
+	if (!owner_->IsBind()) { return; }
+
+
 	if (currentState_ == stateList_[enPlayerState::Jump])
 	{
 		if (!owner_->IsOnGrounded())
@@ -90,6 +100,17 @@ void StateMashine::CheckChangeState()
 	}
 }
 
+/***************** ステータス設定：PlayerStateに情報を送るため ******************/
+
+void StateMashine::SetPipeWarpStatus(Vector3 start, Vector3 end, float time)
+{
+	pipeWarpStart_ = start;
+	pipeWarpEnd_ = end;
+	pipeInOutTime = time;
+}
+
+/*************************** ステートを遷移する条件をまとめた関数 ****************************/
+
 bool StateMashine::ChangeStateWalk()
 {
 	if (inputAmount_ >= 0.01f) { return true; }
@@ -108,5 +129,16 @@ bool StateMashine::ChangeStateJump()
 	{
 		return true;
 	}
+	return false;
+}
+
+bool StateMashine::ChangeStatePipeWarp()
+{
+	if (owner_->IsPipeWarp()) 
+	{
+		return true;
+	}
+
+	isInputDown_ = false; // 下入力フラグをリセット
 	return false;
 }

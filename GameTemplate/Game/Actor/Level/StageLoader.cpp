@@ -51,13 +51,14 @@ void StageLoader::LoadStage(const char* path)
 			/* 動的オブジェクトの生成 */
 
 			/* 土管 */
-			else if (data.ForwardMatchName(L"Pipe"))
+			else if (data.ForwardMatchName(L"Pipe01"))
 			{
 				pipe_ = NewGO<Pipe>(0,"pipe");
 				pipe_->GetTransform()->m_localPosition = data.position;
 				pipe_->GetTransform()->m_localRotation = data.rotation;
 				pipe_->GetTransform()->m_localScale = data.scale;
 				pipe_->GetTransform()->UpdateTransform();
+				pipe_->SetId(1);
 				pipeList_.push_back(pipe_);
 				return false;
 			}

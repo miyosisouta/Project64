@@ -5,12 +5,14 @@
 #pragma once
 class Player;
 class GimmicBase;
+class Coin;
+class Pipe;
 class CollisionHitManager
 {
 private:
-	std::vector<GimmicBase*> gimmicList_; //!< コインのリスト
-
+	std::vector<GimmicBase*> gimmicList_; //!< ギミックのリスト
 	Player* player_ = nullptr; //!< プレイヤーのポインタ
+
 
 private:
 	CollisionHitManager();

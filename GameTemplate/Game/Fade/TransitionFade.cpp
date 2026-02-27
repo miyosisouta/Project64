@@ -28,7 +28,7 @@ void TransitionFade::Update()
 
 
 	// 現在の割合を取得
-	float progress = fadeTimer->CalcUpdate();   
+	float progress = fadeTimer->CalcfloatUpdate();   
 	// モードチェンジが必要かどうかフラグ
     bool isModeChange = (progress >= MAX_ALPHA);
 

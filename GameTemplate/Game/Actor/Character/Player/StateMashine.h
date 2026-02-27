@@ -11,11 +11,12 @@ class StateMashine
 {
 	enum enPlayerState
 	{
-		Idle,	//!< 待機
-		Walk,	//!< 歩き
-		Run,	//!< 走り
-		Jump,	//!< ジャンプ
-		Fall,	//!< 落下
+		Idle,		//!< 待機
+		Walk,		//!< 歩き
+		Run,		//!< 走り
+		Jump,		//!< ジャンプ
+		Fall,		//!< 落下
+		PipeWarp,	//!< 土管ワープ
 		Max,
 	};
 
@@ -30,13 +31,17 @@ private:
 	Vector3 position_; //!< 座標
 	Vector3 scale_; //!< 拡大率
 	Vector3 direction_; //!< 方向
-	Quaternion rotation_; //!< 回転
 	Vector3 moveVector_; //!< 移動ベクトル
+	Vector3 pipeWarpStart_; //!< 土管ワープの開始座標
+	Vector3 pipeWarpEnd_; //!< 土管ワープの終了座標
+	Quaternion rotation_; //!< 回転
 	float inputAmount_ = 0.0f; //!< 入力量
+	float pipeInOutTime = 0.0f; //!< 土管に入る時間
 	bool isInputA_ = false;	//!< Aボタン入力フラグ
 	bool isInputB_ = false;	//!< Bボタン入力フラグ
 	bool isInputX_ = false;	//!< Xボタン入力フラグ
 	bool isInputY_ = false;	//!< Yボタン入力フラグ
+	bool isInputDown_ = false;	//!< 下入力フラグ
 
 
 public:
@@ -52,7 +57,9 @@ public:
 	/* Yボタン入力 */
 	inline void SetInputY(bool isInput) { isInputY_ = isInput; }	//!< 設定
 	inline bool IsInputY() const { return isInputY_; }				//!< 取得
-
+	/* 下ボタン入力 */
+	inline void SetInputDown(bool isInput) { isInputDown_ = isInput; }	//!< 設定
+	inline bool IsInputDown() const { return isInputDown_; }			//!< 取得
 
 	/* 座標 */
 	inline void SetPosition(const Vector3& position) { position_ = position; }	//!< 設定
@@ -85,6 +92,11 @@ public:
 	inline void SetPlayerStatus(PlayerStatus* status) { ownerStatus_ = status; }	//!< プレイヤーステータスの設定
 	inline PlayerStatus* GetPlayerStatus() const { return ownerStatus_; }			//!< プレイヤーステータスの取得
 
+	/* 土管のステータス設定 : playerから設定される*/
+	void SetPipeWarpStatus(Vector3 start, Vector3 end, float time = 5.0f);
+	Vector3 GetPipeWarpStart() const { return pipeWarpStart_; }	//!< 土管ワープの開始座標の取得
+	Vector3 GetPipeWarpEnd() const { return pipeWarpEnd_; }		//!< 土管ワープの終了座標の取得
+	float GetPipeInOutTime() const { return pipeInOutTime; }	//!< 土管に入る時間の取得
 
 public:
 	StateMashine();
@@ -98,7 +110,6 @@ public:
 
 	/* ステートを遷移するかどうか */
 	void ChangeState();
-
 	/* ステートをチェンジするかどうか条件式を並べたもの */
 	void CheckChangeState();
 
@@ -108,5 +119,7 @@ public:
 	bool ChangeStateRun();
 	/* ジャンプステートに変更するか*/
 	bool ChangeStateJump();
+	/* 土管に入るかどうか */
+	bool ChangeStatePipeWarp();
 };
 

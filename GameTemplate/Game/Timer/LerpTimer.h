@@ -23,7 +23,7 @@ public:
 	 * 目標時間になるまで毎フレーム時間を計算、初期は最大1.0f
 	 * 使うときは更新毎に呼ぶ必要がある
 	 */
-	float CalcUpdate(const float ratio = 1.0f)
+	float CalcfloatUpdate(const float ratio = 1.0f)
 	{
 		// 再生中でなければ何もしない
 		if (!isPlay_) { return 0; }
@@ -42,6 +42,20 @@ public:
 
 		// 計算した値を返す
 		return lerpValue;
+	}
+
+	Vector3 CalcVector3Update(const Vector3& start, const Vector3& end)
+	{
+		// 再生中でなければ何もしない
+		if (!isPlay_) { return Vector3::Zero; }
+
+		// 補完率の設定
+		elapsedTime_ += g_gameTime->GetFrameDeltaTime();
+		float lerpValue = min(1.0f, (elapsedTime_ / targetTime_));
+
+		Vector3 result;
+		result.Lerp(lerpValue, start, end);
+		return result;
 	}
 
 public:

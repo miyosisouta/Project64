@@ -1,10 +1,18 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "PlayerState.h"
 #include "Actor/ActorStatus.h"
 #include "Actor/Character/Player/StateMashine.h"
 #include "Actor/Character/Player/Player.h"
+#include "Timer/LerpTimer.h"
 
-/*************** ‘Ò‹@ƒXƒe[ƒg—pƒNƒ‰ƒX **************/
+namespace 
+{
+	static const Vector3 PIPE_TOP_POS = Vector3(0.0f, 80.0f, 0.0f); // åœŸç®¡ã®ä¸€ç•ªä¸Š
+	static const Vector3 PIPE_BOTTOM_POS = Vector3(0.0f, 0.0f, 0.0f); // åœŸç®¡ã®ä¸€ç•ªä¸Š
+}
+
+
+/*************** å¾…æ©Ÿã‚¹ãƒ†ãƒ¼ãƒˆç”¨ã‚¯ãƒ©ã‚¹ **************/
 
 IdleState::IdleState(StateMashine* owner)
 	: IState(owner)
@@ -13,7 +21,7 @@ IdleState::IdleState(StateMashine* owner)
 
 void IdleState::Enter()
 {
-	// ‘Ò‹@ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+	// å¾…æ©Ÿã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
 	owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Idle);
 }
 
@@ -26,7 +34,7 @@ void IdleState::Exit()
 }
 
 
-/*************** •à‚«ƒXƒe[ƒg—pƒNƒ‰ƒX **************/
+/*************** æ­©ãã‚¹ãƒ†ãƒ¼ãƒˆç”¨ã‚¯ãƒ©ã‚¹ **************/
 
 WalkState::WalkState(StateMashine* owner)
 	: IState(owner)
@@ -35,30 +43,30 @@ WalkState::WalkState(StateMashine* owner)
 
 void WalkState::Enter()	
 {
-	// •à‚«ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+	// æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
 	owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Walk);
 }
 
 void WalkState::Update()
 {
-	// “ü—Í—Ê‚ª0.01ˆÈ‰º‚È‚çXV‚µ‚È‚¢
+	// å…¥åŠ›é‡ãŒ0.01ä»¥ä¸‹ãªã‚‰æ›´æ–°ã—ãªã„
 	if (owner_->GetInputAmount() <= 0.01f) { return; }
 
-	// ˆÚ“®•ûŒü‚ğæ“¾
+	// ç§»å‹•æ–¹å‘ã‚’å–å¾—
 	Vector3 moveDir = owner_->GetDirection();
-	// ˆÚ“®—Ê‚ğŒvZ
+	// ç§»å‹•é‡ã‚’è¨ˆç®—
 	Vector3 move = moveDir * owner_->GetPlayerStatus()->GetBasicSpeed() * owner_->GetPlayerStatus()->GetWalkSpeed() * owner_->GetInputAmount();
 
 
-	owner_->SetMoveVector(move); // ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğİ’è
+	owner_->SetMoveVector(move); // ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®š
 }
 
 void WalkState::Exit()
 {
-	owner_->SetMoveVector(Vector3::Zero); // ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğƒŠƒZƒbƒg
+	owner_->SetMoveVector(Vector3::Zero); // ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆ
 }
 
-/*************** ‘–‚èƒXƒe[ƒg—pƒNƒ‰ƒX ***************/
+/*************** èµ°ã‚Šã‚¹ãƒ†ãƒ¼ãƒˆç”¨ã‚¯ãƒ©ã‚¹ ***************/
 
 RunState::RunState(StateMashine* owner)
 	: IState(owner)
@@ -67,29 +75,29 @@ RunState::RunState(StateMashine* owner)
 
 void RunState::Enter()
 {
-	// ‘–‚èƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+	// èµ°ã‚Šã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
 	owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Run);
 }
 
 void RunState::Update()
 {
-	// “ü—Í—Ê‚ª0.01ˆÈ‰º‚È‚çXV‚µ‚È‚¢
+	// å…¥åŠ›é‡ãŒ0.01ä»¥ä¸‹ãªã‚‰æ›´æ–°ã—ãªã„
 	if (owner_->GetInputAmount() <= 0.01f) { return; }
 
-	// ˆÚ“®•ûŒü‚ğæ“¾
+	// ç§»å‹•æ–¹å‘ã‚’å–å¾—
 	Vector3 moveDir = owner_->GetDirection();
-	// ˆÚ“®—Ê‚ğŒvZ
+	// ç§»å‹•é‡ã‚’è¨ˆç®—
 	Vector3 move = moveDir * owner_->GetPlayerStatus()->GetBasicSpeed() * owner_->GetPlayerStatus()->GetRunSpeed() * owner_->GetInputAmount();
 
-	owner_->SetMoveVector(move); // ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğİ’è
+	owner_->SetMoveVector(move); // ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®š
 }
 
 void RunState::Exit()
 {
-	owner_->SetMoveVector(Vector3::Zero); // ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğƒŠƒZƒbƒg
+	owner_->SetMoveVector(Vector3::Zero); // ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆ
 }
 
-/*************** ƒWƒƒƒ“ƒvƒXƒe[ƒg—pƒNƒ‰ƒX ***************/
+/*************** ã‚¸ãƒ£ãƒ³ãƒ—ã‚¹ãƒ†ãƒ¼ãƒˆç”¨ã‚¯ãƒ©ã‚¹ ***************/
 
 JumpState::JumpState(StateMashine* owner)
 	: IState(owner)
@@ -98,19 +106,19 @@ JumpState::JumpState(StateMashine* owner)
 
 void JumpState::Enter()
 {
-	// ƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+	// ã‚¸ãƒ£ãƒ³ãƒ—ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
 	owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Jump);
-	// ƒWƒƒƒ“ƒv‚Ì—Í‚ğ•Û‘¶
+	// ã‚¸ãƒ£ãƒ³ãƒ—ã®åŠ›ã‚’ä¿å­˜
 	currentPosY = owner_->GetPlayerStatus()->GetJumpPower();
 }
 
 void JumpState::Update()
 {
-	// ˆÚ“®•ûŒü‚ğæ“¾
+	// ç§»å‹•æ–¹å‘ã‚’å–å¾—
 	Vector3 moveDir = owner_->GetDirection();
 	Vector3 move = moveDir;
 
-	// XZ•ûŒüi‘OŒã¶‰Ej‚ÌˆÚ“®ˆ—
+	// XZæ–¹å‘ï¼ˆå‰å¾Œå·¦å³ï¼‰ã®ç§»å‹•å‡¦ç†
 	if (owner_->IsInputA()) {
 		move *= owner_->GetPlayerStatus()->GetBasicSpeed() * owner_->GetPlayerStatus()->GetRunSpeed() * owner_->GetInputAmount();
 	}
@@ -118,26 +126,26 @@ void JumpState::Update()
 		move *= owner_->GetPlayerStatus()->GetBasicSpeed() * owner_->GetPlayerStatus()->GetWalkSpeed() * owner_->GetInputAmount();
 	}
 
-	// Y•ûŒüiã‰ºj‚ÌˆÚ“®ˆ—F–ˆƒtƒŒ[ƒ€d—Í‚ğˆø‚­‚¾‚¯I
+	// Yæ–¹å‘ï¼ˆä¸Šä¸‹ï¼‰ã®ç§»å‹•å‡¦ç†ï¼šæ¯ãƒ•ãƒ¬ãƒ¼ãƒ é‡åŠ›ã‚’å¼•ãã ã‘ï¼
 	currentPosY -= owner_->GetPlayerStatus()->GetFallSpeed();
 	move.y = currentPosY;
 
-	// ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğİ’è
+	// ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®š
 	owner_->SetMoveVector(move);
 }
 
 void JumpState::Exit()
 {
-	owner_->SetMoveVector(Vector3::Zero); // ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğƒŠƒZƒbƒg
+	owner_->SetMoveVector(Vector3::Zero); // ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆ
 }
 
 
-/*************** —‰ºƒXƒe[ƒg—pƒNƒ‰ƒX ***************/
+/*************** è½ä¸‹ã‚¹ãƒ†ãƒ¼ãƒˆç”¨ã‚¯ãƒ©ã‚¹ ***************/
 
 FallState::FallState(StateMashine* owner)
 	: IState(owner)
 {
-	currentPosY = 0.0f; // —‚¿‚éƒXƒs[ƒh‚ğ‰Šú‰»
+	currentPosY = 0.0f; // è½ã¡ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’åˆæœŸåŒ–
 }
 
 void FallState::Enter()
@@ -156,7 +164,7 @@ void FallState::Update()
 		move *= owner_->GetPlayerStatus()->GetBasicSpeed() * owner_->GetPlayerStatus()->GetWalkSpeed() * owner_->GetInputAmount();
 	}
 
-	// –ˆƒtƒŒ[ƒ€d—Í‚ğˆø‚¢‚Ä—‚¿‚éƒXƒs[ƒh‚ğ‰Á‘¬‚³‚¹‚é
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ é‡åŠ›ã‚’å¼•ã„ã¦è½ã¡ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’åŠ é€Ÿã•ã›ã‚‹
 	currentPosY -= owner_->GetPlayerStatus()->GetFallSpeed();
 	move.y = currentPosY;
 
@@ -165,5 +173,103 @@ void FallState::Update()
 
 void FallState::Exit()
 {
-	owner_->SetMoveVector(Vector3::Zero); // ƒXƒe[ƒgƒ}ƒVƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğƒŠƒZƒbƒg
+	owner_->SetMoveVector(Vector3::Zero); // ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆ
+}
+
+
+/*************** åœŸç®¡è»¢ç§»ã‚¹ãƒ†ãƒ¼ãƒˆç”¨ã‚¯ãƒ©ã‚¹ ***************/
+
+PipeWarpState::PipeWarpState(StateMashine* owner)
+	: IState(owner)
+{
+	
+}
+
+void PipeWarpState::Enter()
+{
+	startPos_ = owner_->GetPipeWarpStart() + PIPE_TOP_POS;
+	endPos_ = owner_->GetPipeWarpStart() + PIPE_BOTTOM_POS;
+
+	nextPos_ = owner_->GetPipeWarpEnd();
+	timer_ = owner_->GetPipeInOutTime();
+	lerpTimer_.Init(timer_);
+
+	owner_->GetPlayer()->SetBind(false);
+	owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Idle);
+}
+
+void PipeWarpState::Update()
+{
+	if (currentWarpState == enWarp_wait)
+	{
+		if (FadeManager::Get().IsFadeWaitState())
+		{
+			owner_->GetPlayer()->GetTransform()->m_localPosition = startPos_;
+			owner_->GetPlayer()->GetTransform()->UpdateTransform();
+			owner_->GetPlayer()->GetModelRender().SetPosition(owner_->GetPlayer()->GetTransform()->m_position);
+			owner_->GetPlayer()->SetDraw(true);
+
+			// åœŸç®¡ã‹ã‚‰å‡ºã‚‹éš›ã®å‡¦ç†ã‚¹ãƒ†ãƒ¼ãƒˆã«å¤‰æ›´
+			currentWarpState = enWarp_after;
+			// æç”»ã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹
+			owner_->GetPlayer()->SetDraw(true);
+
+			lerpTimer_.Init(timer_);
+		}
+		return;
+	}
+
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ãŒå†ç”Ÿä¸­ãªã‚‰ç§»å‹•å‡¦ç†ã¨ã‚’ã—ãªã„
+	if (FadeManager::Get().IsFadePlay()) { return; }
+
+	float hoge = lerpTimer_.CalcfloatUpdate();
+	Vector3 pos = Math::Lerp(hoge, startPos_, endPos_);
+	float scal = 0.0f;
+
+	if (currentWarpState == enWarp_before) { scal = 1.0f - hoge; }
+	else if (currentWarpState == enWarp_after) { scal = hoge; }
+
+	// åº§æ¨™ã®è¨­å®š
+	owner_->GetPlayer()->GetTransform()->m_localPosition = pos;
+	owner_->GetPlayer()->GetTransform()->UpdateTransform();
+	owner_->GetPlayer()->GetModelRender().SetPosition(owner_->GetPlayer()->GetTransform()->m_position);
+	owner_->GetPlayer()->GetCharaCon().SetPosition(owner_->GetPlayer()->GetTransform()->m_position);
+
+	// å¤§ãã•ã®è¨­å®š
+	owner_->GetPlayer()->GetTransform()->m_localScale.x = scal;
+	owner_->GetPlayer()->GetTransform()->m_localScale.y = scal;
+	owner_->GetPlayer()->GetTransform()->m_localScale.z = scal;
+	owner_->GetPlayer()->GetTransform()->UpdateTransform();
+
+	// ã‚¹ãƒ†ãƒ¼ãƒˆå¤‰æ›´
+	if (hoge >= 0.99f)
+	{
+		if (currentWarpState == enWarp_before)
+		{
+			currentWarpState = enWarp_wait;
+			owner_->GetPlayer()->SetDraw(false);
+
+			// å‡ºã‚‹æ™‚
+			startPos_ = nextPos_;
+			endPos_ = nextPos_ + PIPE_TOP_POS;
+
+			FadeManager::Get().PlayFade(FadeManager::FadeType::enFadeType_Color, TransitionFade::FadeMode::FadeOut, 2.5f, Vector3(1.0f, 1.0f, 1.0f), 2.0f);
+		}
+		else if (currentWarpState == enWarp_after)
+		{
+			currentWarpState = enWarp_finish;
+		}
+	}
+
+
+	if (currentWarpState == enWarp_finish)
+	{
+		owner_->GetPlayer()->SetBind(true);
+	}
+}
+
+void PipeWarpState::Exit()
+{
+	// åˆæœŸã®ã‚¹ãƒ†ãƒ¼ãƒˆã«æˆ»ã™
+	currentWarpState = enWarp_before;
 }
