@@ -21,6 +21,9 @@ private:
 	AnimationClip animationClipList_[enPlayerAnimaitonState::Max]; //!< アニメーションクリップのリスト
 	CharacterController charaCon_; //!< キャラクターコントローラー
 
+	bool isPipeWarp_ = false; //!< 土管に入るかどうか
+	bool isBind_ = false; //!< 移動しているかどうか
+	bool isDraw_ = false; //!< 
 
 public:
 	/* ステートマシンの取得 */
@@ -29,9 +32,30 @@ public:
 	PlayerStatus* GetPlayerStatus() { return dynamic_cast<PlayerStatus*>(status_); }
 	/* キャラコンの取得 */
 	CharacterController& GetCharaCon() { return charaCon_; }
+	
+	/* キャラコンの作成 */
+	void CreateCharaCon() 
+	{
+		charaCon_.Init(GetPlayerStatus()->GetRadius(), GetPlayerStatus()->GetHeight(), transform_.m_position); // キャラクターコントローラーの初期化
+	}
+	/* キャラコンの当たり判定削除 */
+	void DeleteCharaCon()
+	{
+		charaCon_.RemoveRigidBoby();
+	}
 
 	/* プレイヤーが地面についているか取得 */
 	bool IsOnGrounded() const { return charaCon_.IsOnGround(); }
+
+	/* 土管 */
+	inline bool IsPipeWarp() const { return isPipeWarp_; } //!< 土管に入るかどうかの取得
+	inline void SetPipeWarp(bool isPipeWarp) { isPipeWarp_ = isPipeWarp; } //!< 土管に入るかどうかの設定
+	/* 動き */
+	inline bool IsBind() const { return isBind_; } //!< 移動しているかどうかの取得
+	inline void SetBind(bool isBind) { isBind_ = isBind; } //!< 移動しているかどうかの設定
+	/* 描画 */
+	inline bool IsDraw() const { return isDraw_; } //!< 描画しているかどうかの取得
+	inline void SetDraw(bool isDraw) { isDraw_ = isDraw; } //!< 描画しているかどうかの設定
 
 
 public:
@@ -40,5 +64,13 @@ public:
 	bool Start() override;
 	void Update() override;
 	void Render(RenderContext& rc) override;
+
+
+public:
+	/*
+	 * 土管による遷移の初期化。
+	 * start: 土管の入り口の座標, end: 土管の出口の座標, inFlag: 土管に入る遷移かどうか
+	 */
+	void InitPipeWarp(Vector3 start, Vector3 end, bool inFlag = true);
 };
 

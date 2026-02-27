@@ -1,13 +1,16 @@
 #include "stdafx.h"
 #include "Coin.h"
+#include "Actor/Gimmic/GimmicBase.h"
 #include "Collision/CollisionManager.h"
+
 
 namespace 
 {
-	constexpr float PIPE_COLLISION_SIZE = 0.3f; // コインの当たり判定のサイズ
 	constexpr uint8_t ADD_COIN_YELLOW = 1;	// 黄色コインの追加コイン数
 	constexpr uint8_t ADD_COIN_RED = 2;		// 黄色コインの追加コイン数
 	constexpr uint8_t ADD_COIN_BLUE = 5;	// 黄色コインの追加コイン数
+
+	static const Vector3 COLLISION_SIZE = Vector3(100.0f, 100.0f, 20.0f); // コインの当たり判定のサイズ
 }
 
 /**************************** 黄色コイン ****************************/
@@ -30,18 +33,12 @@ bool YellowCoin::Start()
 		model_.SetScale(transform_.m_scale);
 	}
 
-	// コインの当たり判定のサイズをモデルの大きさより少し大きくする
-	Vector3 collisionSize = Vector3(
-		transform_.m_scale.x + PIPE_COLLISION_SIZE,
-		transform_.m_scale.y + PIPE_COLLISION_SIZE,
-		transform_.m_scale.z + PIPE_COLLISION_SIZE
-	); 
 
 	// コインの当たり判定を作成
 	{
-		collision_ = new CollisionObject();
-		collision_->CreateBox(transform_.m_position, transform_.m_rotation, collisionSize);
-		collision_->SetIsEnableAutoDelete(false); // コインは自動で削除されないようにする
+		triggerCollision_ = new CollisionObject();
+		triggerCollision_->CreateBox(transform_.m_position, transform_.m_rotation, COLLISION_SIZE);
+		triggerCollision_->SetIsEnableAutoDelete(false); // コインは自動で削除されないようにする
 	}
 
 	// 当たり判定管理クラスにコインとエリア番号を登録
@@ -59,11 +56,11 @@ void YellowCoin::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-void YellowCoin::AddEffect()
+GimmicBase::enHitReactionType YellowCoin::AddEffect()
 {
 	UserData::Get().AddTotalCoin(ADD_COIN_YELLOW); // 合計コイン数を1追加
 	DeleteGO(this); // コインを削除
-
+	return enHitReactionType::enHitReactionType_None;
 }
 
 /**************************** 赤コイン ****************************/
@@ -83,16 +80,9 @@ bool RedCoin::Start()
 	model_.SetRotation(transform_.m_rotation);
 	model_.SetScale(transform_.m_scale);
 
-	// コインの当たり判定のサイズをモデルの大きさより少し大きくする
-	Vector3 collisionSize = Vector3(
-		transform_.m_scale.x + PIPE_COLLISION_SIZE,
-		transform_.m_scale.y + PIPE_COLLISION_SIZE,
-		transform_.m_scale.z + PIPE_COLLISION_SIZE
-	);
-
-	collision_ = new CollisionObject();
-	collision_->CreateSphere(transform_.m_position, transform_.m_rotation, 0.5f);
-	collision_->SetIsEnableAutoDelete(false);
+	triggerCollision_ = new CollisionObject();
+	triggerCollision_->CreateBox(transform_.m_position, transform_.m_rotation, COLLISION_SIZE);
+	triggerCollision_->SetIsEnableAutoDelete(false);
 
 	// 当たり判定管理クラスにコインとエリア番号を登録
 	CollisionHitManager::Get().RegistGimmicList(this);
@@ -109,10 +99,11 @@ void RedCoin::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-void RedCoin::AddEffect()
+GimmicBase::enHitReactionType RedCoin::AddEffect()
 {
 	UserData::Get().AddTotalCoin(ADD_COIN_RED); // 合計コイン数を2追加
 	DeleteGO(this); // コインを削除
+	return enHitReactionType::enHitReactionType_None;
 }
 
 /**************************** 青コイン ****************************/
@@ -135,18 +126,12 @@ bool BlueCoin::Start()
 		model_.SetScale(transform_.m_scale);
 	}
 
-	// コインの当たり判定のサイズをモデルの大きさより少し大きくする
-	Vector3 collisionSize = Vector3(
-		transform_.m_scale.x + PIPE_COLLISION_SIZE,
-		transform_.m_scale.y + PIPE_COLLISION_SIZE,
-		transform_.m_scale.z + PIPE_COLLISION_SIZE
-	);
 
 	// コインの当たり判定を作成
 	{
-		collision_ = new CollisionObject();
-		collision_->CreateSphere(transform_.m_position, transform_.m_rotation, 0.5f);
-		collision_->SetIsEnableAutoDelete(false);
+		triggerCollision_ = new CollisionObject();
+		triggerCollision_->CreateBox(transform_.m_position, transform_.m_rotation, COLLISION_SIZE);
+		triggerCollision_->SetIsEnableAutoDelete(false);
 	}
 	// 当たり判定管理クラスにコインとエリア番号を登録
 	CollisionHitManager::Get().RegistGimmicList(this);
@@ -163,8 +148,9 @@ void BlueCoin::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-void BlueCoin::AddEffect()
+GimmicBase::enHitReactionType BlueCoin::AddEffect()
 {
 	UserData::Get().AddTotalCoin(ADD_COIN_BLUE); // 合計コイン数を5追加
 	DeleteGO(this); // コインを削除
+	return enHitReactionType::enHitReactionType_None;
 }

@@ -6,8 +6,8 @@
         "run": 1.25,
         "jumpMaxHeight":30.0,
         "fallSpeed":0.8,
-        "radius":30.0,
-        "height":100.0,
+        "radius":25.0,
+        "height":75.0,
         "health":8
     }
 ]
