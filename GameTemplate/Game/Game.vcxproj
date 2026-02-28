@@ -232,6 +232,7 @@
     <ClCompile Include="Actor\Gimmic\Coin.cpp" />
     <ClCompile Include="Actor\Gimmic\GimmicBase.cpp" />
     <ClCompile Include="Actor\Gimmic\Pipe.cpp" />
+    <ClCompile Include="Actor\Gimmic\Star.cpp" />
     <ClCompile Include="Actor\Level\BossStage.cpp" />
     <ClCompile Include="Actor\Level\NormalStage.cpp" />
     <ClCompile Include="Actor\Level\StageBase.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="Actor\Gimmic\Coin.h" />
     <ClInclude Include="Actor\Gimmic\GimmicBase.h" />
     <ClInclude Include="Actor\Gimmic\Pipe.h" />
+    <ClInclude Include="Actor\Gimmic\Star.h" />
     <ClInclude Include="Actor\Level\BossStage.h" />
     <ClInclude Include="Actor\Level\NormalStage.h" />
     <ClInclude Include="Actor\Level\StageBase.h" />

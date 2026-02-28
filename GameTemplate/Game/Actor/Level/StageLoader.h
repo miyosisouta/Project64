@@ -5,6 +5,7 @@ class RedCoin;
 class BlueCoin;
 class Pipe;
 class StaticObject;
+class Star;
 /*
  * StageLoader.h
  * ステージ読み込みクラス
@@ -19,6 +20,7 @@ private:
 	BlueCoin* blueCoin_ = nullptr;
 	Pipe* pipe_ = nullptr;
 	StaticObject* staticObject_ = nullptr;
+	Star* star_ = nullptr;
 
 	/* コンテナ */
 	std::vector<YellowCoin*> yellowCoinList_;
@@ -26,6 +28,7 @@ private:
 	std::vector<BlueCoin*> blueCoinList_;
 	std::vector<Pipe*> pipeList_;
 	std::vector<StaticObject*> staticObjectList_;
+	std::vector<Star*> starList_;
 
 
 public:

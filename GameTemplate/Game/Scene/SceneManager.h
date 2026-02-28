@@ -34,6 +34,11 @@ public:
 	/* シーンの切り替え */
 	void ChangeSceneRequest(SceneMode sceneMode);
 
+
+public:
+	IScene* GetCurrentScene() { return currentScene_; }
+
+
 private:
 	/* 次のシーンの生成・初期化処理、現在のシーンの削除 */
 	void ExecuteSceneChange();

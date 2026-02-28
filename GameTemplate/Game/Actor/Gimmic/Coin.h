@@ -10,7 +10,7 @@ public:
 	virtual bool Start()override { return true; };
 	virtual void Update()override {};
 	virtual void Render(RenderContext& rc)override {};
-	virtual enHitReactionType AddEffect() override { return enHitReactionType_None; }
+	virtual enHitReactionType DoEffect() override { return enHitReactionType_None; }
 };
 
 
@@ -23,7 +23,7 @@ public:
 	bool Start()override;
 	void Update()override;
 	void Render(RenderContext& rc)override;
-	enHitReactionType AddEffect() override;
+	enHitReactionType DoEffect() override;
 };
 
 class RedCoin : public Coin
@@ -35,7 +35,7 @@ public:
 	bool Start()override;
 	void Update()override;
 	void Render(RenderContext& rc)override;
-	enHitReactionType AddEffect() override;
+	enHitReactionType DoEffect() override;
 };
 
 class BlueCoin : public Coin
@@ -47,6 +47,6 @@ public:
 	bool Start()override;
 	void Update()override;
 	void Render(RenderContext& rc)override;
-	enHitReactionType AddEffect() override;
+	enHitReactionType DoEffect() override;
 };
 

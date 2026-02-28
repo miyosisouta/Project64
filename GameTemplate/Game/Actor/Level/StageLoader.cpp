@@ -2,6 +2,7 @@
 #include "StageLoader.h"
 #include "Actor/Gimmic/Coin.h"
 #include "Actor/Gimmic/Pipe.h"
+#include "Actor/Gimmic/Star.h"
 #include "Actor/Map/StaticObject.h"
 
 namespace 
@@ -16,6 +17,9 @@ namespace
 	/* ここから静的オブジェクトのアセットパスを設定 */
 	constexpr const char* STATIC_OBJECT_FLATGROUND = "Assets/modelData/Stage/ObjectData/Ground.tkm";
 	constexpr const char* STATIC_OBJECT_HOUSE = "Assets/modelData/Stage/ObjectData/House.tkm";
+	constexpr const char* STATIC_OBJECT_LONGTREE = "Assets/modelData/Stage/ObjectData/LongTree.tkm";
+	constexpr const char* STATIC_OBJECT_FLOWER = "Assets/modelData/Stage/ObjectData/Flower.tkm";
+	constexpr const char* STATIC_OBJECT_WOOD = "Assets/modelData/Stage/ObjectData/Wood.tkm";
 }
 
 
@@ -47,18 +51,75 @@ void StageLoader::LoadStage(const char* path)
 				staticObjectList_.push_back(staticObject_);
 				return false;
 			}
+			if (data.ForwardMatchName(L"LongTree"))
+			{
+				staticObject_ = NewGO<StaticObject>(0, "LongTree");
+				staticObject_->GetModelRender().Init(STATIC_OBJECT_LONGTREE);
+				staticObject_->GetTransform()->m_localPosition = data.position;
+				staticObject_->GetTransform()->m_localRotation = data.rotation;
+				staticObject_->GetTransform()->m_localScale = data.scale;
+				staticObject_->GetTransform()->UpdateTransform();
+				staticObjectList_.push_back(staticObject_);
+				return false;
+			}
+			if (data.ForwardMatchName(L"flower"))
+			{
+				staticObject_ = NewGO<StaticObject>(0, "flower");
+				staticObject_->GetModelRender().Init(STATIC_OBJECT_FLOWER);
+				staticObject_->GetTransform()->m_localPosition = data.position;
+				staticObject_->GetTransform()->m_localRotation = data.rotation;
+				staticObject_->GetTransform()->m_localScale = data.scale;
+				staticObject_->GetTransform()->UpdateTransform();
+				staticObjectList_.push_back(staticObject_);
+				return false;
+			}
+			if (data.ForwardMatchName(L"Wood"))
+			{
+				staticObject_ = NewGO<StaticObject>(0, "Wood");
+				staticObject_->GetModelRender().Init(STATIC_OBJECT_WOOD);
+				staticObject_->GetTransform()->m_localPosition = data.position;
+				staticObject_->GetTransform()->m_localRotation = data.rotation;
+				staticObject_->GetTransform()->m_localScale = data.scale;
+				staticObject_->GetTransform()->UpdateTransform();
+				staticObjectList_.push_back(staticObject_);
+				return false;
+			}
 
+			/*------------------------*/
 			/* 動的オブジェクトの生成 */
+			/*------------------------*/
+
+			/* スター */
+			else if (data.ForwardMatchName(L"Star"))
+			{
+				star_ = NewGO<Star>(0, "star");
+				star_->GetTransform()->m_localPosition = data.position;
+				star_->GetTransform()->m_localRotation = data.rotation;
+				star_->GetTransform()->m_localScale = data.scale;
+				star_->GetTransform()->UpdateTransform();
+				starList_.push_back(star_);
+			}
 
 			/* 土管 */
 			else if (data.ForwardMatchName(L"Pipe01"))
 			{
-				pipe_ = NewGO<Pipe>(0,"pipe");
+				pipe_ = NewGO<Pipe>(0,"pipe01");
 				pipe_->GetTransform()->m_localPosition = data.position;
 				pipe_->GetTransform()->m_localRotation = data.rotation;
 				pipe_->GetTransform()->m_localScale = data.scale;
 				pipe_->GetTransform()->UpdateTransform();
 				pipe_->SetId(1);
+				pipeList_.push_back(pipe_);
+				return false;
+			}
+			else if (data.ForwardMatchName(L"Pipe02"))
+			{
+				pipe_ = NewGO<Pipe>(0, "pipe02");
+				pipe_->GetTransform()->m_localPosition = data.position;
+				pipe_->GetTransform()->m_localRotation = data.rotation;
+				pipe_->GetTransform()->m_localScale = data.scale;
+				pipe_->GetTransform()->UpdateTransform();
+				pipe_->SetId(2);
 				pipeList_.push_back(pipe_);
 				return false;
 			}

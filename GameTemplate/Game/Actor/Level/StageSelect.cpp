@@ -6,6 +6,8 @@ StageSelect::StageSelect()
 {
 	stageLoader_ = new StageLoader();
 	LoadStageData();
+	normalCollision_ = new CollisionHitObject();
+	
 }
 
 StageSelect::~StageSelect()
@@ -28,6 +30,8 @@ void StageSelect::UnloadStageData()
 void StageSelect::Update()
 {
 	stageLoader_->Update();
+
+
 }
 
 void StageSelect::Render(RenderContext& rc)
