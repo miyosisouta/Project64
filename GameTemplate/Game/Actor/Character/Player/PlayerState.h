@@ -103,7 +103,30 @@ public:
 	void Enter() override;
 	void Update() override;
 	void Exit() override;
+};
 
+class ClearEventState : public IState
+{
+	enum State
+	{
+		enIdle, // 待機
+		enJump, // ジャンプ中
+		enStay	// 空中でとどまる
+	};
+
+private:
+	State eventState_ = State::enIdle; // イベントの状態
+	Vector3 playerStartPos_ = Vector3::Zero; // ジャンプ前のプレイヤー座標
+	Vector3 playerEndPos_ = Vector3::Zero; // ジャンプ後のプレイヤー座標
+	LerpTimer timer_;
+
+public:
+	ClearEventState(StateMashine* owner);
+	~ClearEventState() {}
+
+	void Enter() override;
+	void Update() override;
+	void Exit() override;
 };
 
 

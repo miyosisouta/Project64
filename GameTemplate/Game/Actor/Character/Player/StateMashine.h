@@ -17,6 +17,7 @@ class StateMashine
 		Jump,		//!< ジャンプ
 		Fall,		//!< 落下
 		PipeWarp,	//!< 土管ワープ
+		ClearEvent, //!< クリアイベント
 		Max,
 	};
 

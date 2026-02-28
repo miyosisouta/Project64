@@ -159,6 +159,20 @@ void StageLoader::LoadStage(const char* path)
 				yellowCoinList_.push_back(yellowCoin_);
 				return true;
 			}
+
+			/*------------------------*/
+			/*-- クリアイベント座標 --*/
+			/*------------------------*/
+
+			else if (data.ForwardMatchName(L"ClearEventPos")) 
+			{
+				SceneManager::Get().InitClearEventPlayer
+				(
+					data.position,
+					data.rotation,
+					data.scale
+				);
+			}
 		});
 }
 

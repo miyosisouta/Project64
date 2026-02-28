@@ -15,7 +15,7 @@ namespace
 		AnimationData{"Assets/animData/idle.tka", true},
 		AnimationData{"Assets/animData/walk.tka", true},
 		AnimationData{"Assets/animData/run.tka", true},
-		AnimationData{"Assets/animData/jump.tka", true},
+		AnimationData{"Assets/animData/jump.tka", false},
 	};
 	static_assert(ARRAYSIZE(animationDataList) == static_cast<uint8_t>(Player::enPlayerAnimaitonState::Max), "アニメーション数があっていません！");
 }
@@ -61,7 +61,7 @@ void Player::Update()
 
 	// 移動処理
 	Vector3 moveVector = stateMashine_->GetMoveVector(); // 移動ベクトルを取得
-	if (moveVector.LengthSq() >= 0.01f)
+	if (moveVector.LengthSq() >= 0.01f || !isBind_)
 	{
 		const Vector3& position = charaCon_.Execute(moveVector, 1.0f); // あえて1.0f
 		// 判定処理結果の座標を設定

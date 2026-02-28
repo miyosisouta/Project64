@@ -34,7 +34,15 @@ void InGameScene::Update()
 	// クリア後、フェード待ち状態になった場合、
 	if (FadeManager::Get().IsFadeWaitState())
 	{
-
+		// プレイヤー
+		{
+			player_->GetTransform()->m_localPosition = SceneManager::Get().GetClearEventPlayerPos(); // 座標
+			player_->GetTransform()->m_localRotation = SceneManager::Get().GetClearEventPlayerRot(); // 回転
+			player_->GetTransform()->m_localScale = SceneManager::Get().GetClearEventPlayerScal();	 // 大きさ
+			player_->GetTransform()->UpdateTransform(); // トランスフォームの更新
+			player_->SetClearEventAction(true);
+			player_->SetBind(true);
+		}
 	}
 
 }

@@ -13,6 +13,7 @@ StateMashine::StateMashine()
 	stateList_[enPlayerState::Jump] = new JumpState(this);
 	stateList_[enPlayerState::Fall] = new FallState(this);
 	stateList_[enPlayerState::PipeWarp] = new PipeWarpState(this);
+	stateList_[enPlayerState::ClearEvent] = new ClearEventState(this);
 }
 
 StateMashine::~StateMashine()
@@ -57,6 +58,11 @@ void StateMashine::ChangeState()
 
 void StateMashine::CheckChangeState()
 {
+	if (owner_->IsClearEventAction())
+	{
+		nextState_ = stateList_[enPlayerState::ClearEvent]; // クリアイベントに変更
+		return;
+	}
 	if (ChangeStatePipeWarp())
 	{
 		nextState_ = stateList_[enPlayerState::PipeWarp]; // 土管ワープステートに変更
