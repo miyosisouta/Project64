@@ -17,6 +17,6 @@ public:
 	void Update()override;
 	void Render(RenderContext& rc)override;
 
-	enHitReactionType AddEffect()override;
+	enHitReactionType DoEffect()override;
 };
 

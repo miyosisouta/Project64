@@ -56,11 +56,10 @@ void YellowCoin::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-GimmicBase::enHitReactionType YellowCoin::AddEffect()
+GimmicBase::enHitReactionType YellowCoin::DoEffect()
 {
 	UserData::Get().AddTotalCoin(ADD_COIN_YELLOW); // 合計コイン数を1追加
-	DeleteGO(this); // コインを削除
-	return enHitReactionType::enHitReactionType_None;
+	return enHitReactionType::enHitReactionType_Coin;
 }
 
 /**************************** 赤コイン ****************************/
@@ -99,11 +98,10 @@ void RedCoin::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-GimmicBase::enHitReactionType RedCoin::AddEffect()
+GimmicBase::enHitReactionType RedCoin::DoEffect()
 {
 	UserData::Get().AddTotalCoin(ADD_COIN_RED); // 合計コイン数を2追加
-	DeleteGO(this); // コインを削除
-	return enHitReactionType::enHitReactionType_None;
+	return enHitReactionType::enHitReactionType_Coin;
 }
 
 /**************************** 青コイン ****************************/
@@ -148,9 +146,8 @@ void BlueCoin::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-GimmicBase::enHitReactionType BlueCoin::AddEffect()
+GimmicBase::enHitReactionType BlueCoin::DoEffect()
 {
 	UserData::Get().AddTotalCoin(ADD_COIN_BLUE); // 合計コイン数を5追加
-	DeleteGO(this); // コインを削除
-	return enHitReactionType::enHitReactionType_None;
+	return enHitReactionType::enHitReactionType_Coin;
 }

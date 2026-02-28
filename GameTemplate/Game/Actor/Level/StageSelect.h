@@ -3,6 +3,9 @@
 
 class StageSelect : public StageBase
 {
+private:
+	CollisionHitObject* normalCollision_;
+
 public:
 	StageSelect();
 	~StageSelect();

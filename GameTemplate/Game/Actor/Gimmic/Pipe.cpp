@@ -49,19 +49,19 @@ bool Pipe::Start()
 		}
 		// 固い床用
 		{
-			// ① 床の「形」を箱型として作成する
+			// 床の「形」を箱型として作成する
 			solidBoxCollider_.Create(PIPE_SOLID_COLLISION_SIZE);
 
-			// ② 剛体（物理挙動）の初期化設定を作る
+			//　剛体の初期化設定を作る
 			nsK2EngineLow::RigidBodyInitData rbInfo;
 			rbInfo.pos = transform_.m_position + PIPE_COLLISION_SOLID_POS_UP;
 			rbInfo.rot = transform_.m_rotation;
 			rbInfo.collider = &solidBoxCollider_;
 
-			// ★ここが超重要！質量を「0.0f」にすると「絶対に動かない固い壁（スタティック）」になる！
+			// 質量を0.0fにすると絶対に動かない固い壁になる
 			rbInfo.mass = 0.0f;
 
-			// ③ 設定を元に剛体を初期化（ここで自動的に物理エンジンに登録されます）
+			// 設定を元に剛体を初期化
 			solidRigidBody_.Init(rbInfo);
 		}
 	}
@@ -82,7 +82,7 @@ void Pipe::Render(RenderContext& rc)
 	model_.Draw(rc);
 }
 
-GimmicBase::enHitReactionType Pipe::AddEffect()
+GimmicBase::enHitReactionType Pipe::DoEffect()
 {
 	return enHitReactionType::enHitReactionType_PipeWarp;
 }

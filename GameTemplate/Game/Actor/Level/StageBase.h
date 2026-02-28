@@ -14,6 +14,13 @@ public:
 	virtual void Update();
 	virtual void Render(RenderContext& rc);
 
+
+public:
+	/* ÉNÉäÉA */
+	void SetClearFlag(bool flag) { isClear_ = flag; };
+	bool IsClear() { return isClear_; }
+
+
 protected:
 	virtual void LoadStageData() = 0;
 	virtual void UnloadStageData() = 0;

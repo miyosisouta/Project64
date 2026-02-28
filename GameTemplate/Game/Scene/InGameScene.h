@@ -5,7 +5,6 @@
  */
 #include "Scene/IScene.h"
 
-class IScene;
 class InGameScene : public IScene
 {
 public:

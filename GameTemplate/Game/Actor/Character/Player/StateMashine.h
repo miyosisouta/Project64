@@ -93,7 +93,7 @@ public:
 	inline PlayerStatus* GetPlayerStatus() const { return ownerStatus_; }			//!< プレイヤーステータスの取得
 
 	/* 土管のステータス設定 : playerから設定される*/
-	void SetPipeWarpStatus(Vector3 start, Vector3 end, float time = 5.0f);
+	void SetPipeWarpStatus(Vector3 start, Vector3 end, float time = 3.0f);
 	Vector3 GetPipeWarpStart() const { return pipeWarpStart_; }	//!< 土管ワープの開始座標の取得
 	Vector3 GetPipeWarpEnd() const { return pipeWarpEnd_; }		//!< 土管ワープの終了座標の取得
 	float GetPipeInOutTime() const { return pipeInOutTime; }	//!< 土管に入る時間の取得

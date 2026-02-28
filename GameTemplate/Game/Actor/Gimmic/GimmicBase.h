@@ -14,6 +14,8 @@ public:
 	{
 		enHitReactionType_None,		// 反応なし
 		enHitReactionType_PipeWarp,	// 土管に入る
+		enHitReactionType_Coin,		// コインを入手
+		enHitReactionType_Star		// スター入手
 	};
 
 protected:
@@ -36,7 +38,7 @@ public:
 	virtual bool Start()override { return true; };
 	virtual void Update()override {};
 	virtual void Render(RenderContext& rc)override {};
-	virtual enHitReactionType AddEffect() { return enHitReactionType::enHitReactionType_None; }	//ギミックにエフェクトを追加するための関数
+	virtual enHitReactionType DoEffect() { return enHitReactionType::enHitReactionType_None; }	//ギミックにエフェクトを追加するための関数
 
 
 	CollisionObject* GetTriggerCollision() const { return triggerCollision_; }	//!< アクション用コリジョンの取得

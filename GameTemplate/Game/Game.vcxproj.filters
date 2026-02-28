@@ -154,6 +154,9 @@
     <ClCompile Include="Actor\Gimmic\GimmicBase.cpp">
       <Filter>Actor\Gimmic</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Gimmic\Star.cpp">
+      <Filter>Actor\Gimmic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -269,6 +272,9 @@
       <Filter>Collision</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Gimmic\GimmicBase.h">
+      <Filter>Actor\Gimmic</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Gimmic\Star.h">
       <Filter>Actor\Gimmic</Filter>
     </ClInclude>
   </ItemGroup>

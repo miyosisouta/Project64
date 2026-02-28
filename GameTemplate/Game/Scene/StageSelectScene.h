@@ -7,13 +7,8 @@
 
 class GameCamera;
 class Player;
-class StageBase;
 class StageSelectScene : public IScene
 {
-private:
-	StageBase* stage_ = nullptr;
-
-
 public:
 	StageSelectScene();
 	~StageSelectScene();

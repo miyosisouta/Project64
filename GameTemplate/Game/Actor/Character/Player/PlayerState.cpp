@@ -253,7 +253,7 @@ void PipeWarpState::Update()
 			startPos_ = nextPos_;
 			endPos_ = nextPos_ + PIPE_TOP_POS;
 
-			FadeManager::Get().PlayFade(FadeManager::FadeType::enFadeType_Color, TransitionFade::FadeMode::FadeOut, 2.5f, Vector3(1.0f, 1.0f, 1.0f), 2.0f);
+			FadeManager::Get().PlayFade(FadeManager::FadeType::enFadeType_Color, TransitionFade::FadeMode::FadeOut, 1.5f, Vector3(0.0f, 0.0f, 0.0f), 2.0f);
 		}
 		else if (currentWarpState == enWarp_after)
 		{

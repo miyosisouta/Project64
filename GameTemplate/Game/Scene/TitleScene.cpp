@@ -24,7 +24,7 @@ void TitleScene::Update()
 {
 	if (g_pad[0]->IsTrigger(enButtonA)) 
 	{
-		SceneManager::Get().ChangeSceneRequest(SceneManager::SceneMode::StageSelectScene); 
+		SceneManager::Get().ChangeSceneRequest(SceneManager::SceneMode::InGameScene); 
 	}
 }
 

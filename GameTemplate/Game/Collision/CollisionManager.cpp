@@ -4,6 +4,7 @@
 #include "Actor/Gimmic/Pipe.h"
 #include "Actor/Character/Player/Player.h"
 #include "Actor/Gimmic/GimmicBase.h"
+#include "Scene/InGameScene.h"
 
 /*********************************** CollisionHitManager ***************************************/
 
@@ -38,7 +39,7 @@ void CollisionHitManager::Update()
 		// 当たり判定があった場合
 		if (gimmic->GetTriggerCollision()->IsHit(player_->GetCharaCon())) 
 		{ 
-			auto effectType = gimmic->AddEffect();		// ギミックの効果を発動
+			auto effectType = gimmic->DoEffect();		// ギミックの効果を発動
 
 			switch (effectType) 
 			{
@@ -66,6 +67,17 @@ void CollisionHitManager::Update()
 					player_->SetPipeWarp(true);	// プレイヤーの土管に入るフラグを立てる：ステートマシーンにて土管遷移の処理を行うため
 					player_->InitPipeWarp(startPos, endPos); // 土管の入り口の座標を渡して土管遷移の初期化
 					break;
+				}
+				case GimmicBase::enHitReactionType::enHitReactionType_Coin:
+				{
+					DeleteGO(gimmic);
+					break;
+				}
+				case GimmicBase::enHitReactionType::enHitReactionType_Star:
+				{
+					DeleteGO(gimmic);
+					SceneManager::Get().GetCurrentScene()->SetClearFlag(true);
+					FadeManager::Get().PlayFade(FadeManager::FadeType::enFadeType_Color, TransitionFade::FadeMode::FadeOut, 2.5f, Vector3(1.0f, 1.0f, 1.0f), 2.0f);
 				}
 				default:
 					break;

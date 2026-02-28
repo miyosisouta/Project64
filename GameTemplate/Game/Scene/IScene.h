@@ -7,6 +7,7 @@
 #include "Actor/Character/Player/Player.h"
 #include "Actor/Character/Player/Controller.h"
 
+class StageBase;
 class LerpTimer;
 class IScene
 {
@@ -15,6 +16,12 @@ protected:
 	Player* player_ = nullptr;
 	Controller* controller_ = nullptr;
 	GameCamera* camera_ = nullptr;
+	StageBase* stage_ = nullptr;
+	bool isClear_ = false;
+
+public:
+	inline void SetClearFlag(bool flg) { isClear_ = flg; }
+	inline bool GetClearFlag() { return isClear_; }
 
 public:
 	IScene();
@@ -32,5 +39,7 @@ public:
 
 	/* ï`âÊèàóù */
 	virtual void Render(RenderContext& rc) = 0;
+
+
 };
 

@@ -36,6 +36,7 @@ void StageSelectScene::Update()
 
 void StageSelectScene::Exit()
 {
+	
 }
 
 void StageSelectScene::Render(RenderContext& rc)
