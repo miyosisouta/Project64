@@ -7,8 +7,13 @@
 
 namespace 
 {
+	/****** 土管 ******/
 	static const Vector3 PIPE_TOP_POS = Vector3(0.0f, 80.0f, 0.0f); // 土管の一番上
 	static const Vector3 PIPE_BOTTOM_POS = Vector3(0.0f, 0.0f, 0.0f); // 土管の一番上
+
+	/****** クリアイベント ********/
+	constexpr const float JUMP_TIME = 1.5f; // ジャンプ時間
+	constexpr const float CAMERA_OFFSET = 50.0f; // カメラの動き
 }
 
 
@@ -222,12 +227,12 @@ void PipeWarpState::Update()
 	// フェードが再生中なら移動処理とをしない
 	if (FadeManager::Get().IsFadePlay()) { return; }
 
-	float hoge = lerpTimer_.CalcfloatUpdate();
-	Vector3 pos = Math::Lerp(hoge, startPos_, endPos_);
+	float t = lerpTimer_.CalcfloatUpdate();
+	Vector3 pos = Math::Lerp(t, startPos_, endPos_);
 	float scal = 0.0f;
 
-	if (currentWarpState == enWarp_before) { scal = 1.0f - hoge; }
-	else if (currentWarpState == enWarp_after) { scal = hoge; }
+	if (currentWarpState == enWarp_before) { scal = 1.0f - t; }
+	else if (currentWarpState == enWarp_after) { scal = t; }
 
 	// 座標の設定
 	owner_->GetPlayer()->GetTransform()->m_localPosition = pos;
@@ -242,7 +247,7 @@ void PipeWarpState::Update()
 	owner_->GetPlayer()->GetTransform()->UpdateTransform();
 
 	// ステート変更
-	if (hoge >= 0.99f)
+	if (t >= 0.99f)
 	{
 		if (currentWarpState == enWarp_before)
 		{
@@ -272,4 +277,68 @@ void PipeWarpState::Exit()
 {
 	// 初期のステートに戻す
 	currentWarpState = enWarp_before;
+}
+
+/*************** クリアイベントステート用クラス ***************/
+
+namespace
+{
+	static const Vector3 JUMP_POS_HEIGHT = Vector3(0.0f, 300.0f, 0.0f);
+}
+
+ClearEventState::ClearEventState(StateMashine* owner)
+	: IState(owner)
+{
+	
+}
+
+void ClearEventState::Enter()
+{
+	// 待機アニメーション
+	owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Idle);
+	playerStartPos_ = owner_->GetPlayer()->GetTransform()->m_position;
+	playerEndPos_ = owner_->GetPlayer()->GetTransform()->m_position + JUMP_POS_HEIGHT;
+	timer_.Init(JUMP_TIME);
+}
+
+void ClearEventState::Update()
+{
+	switch (eventState_)
+	{
+	case State::enIdle:
+	{
+		if (!FadeManager::Get().IsFadePlay()) {
+			owner_->GetPlayer()->GetModelRender().PlayAnimation(Player::enPlayerAnimaitonState::Jump);
+			eventState_ = State::enJump;
+		}
+		break;
+	}
+	case State::enJump:
+	{
+		float t = timer_.CalcfloatUpdate(); // 経過時間による補完率
+		Vector3 currentPos = Math::Lerp(t, playerStartPos_, playerEndPos_); // 現在の座標
+
+		// 座標の設定
+		owner_->GetPlayer()->GetTransform()->m_localPosition = currentPos;
+		owner_->GetPlayer()->GetTransform()->UpdateTransform();
+		owner_->GetPlayer()->GetModelRender().SetPosition(owner_->GetPlayer()->GetTransform()->m_position);
+
+		// カメラへ進行度を送る
+		owner_->GetPlayer()->SetClearEventProgress(t);
+
+		if (t >= 1.0f) {
+			eventState_ = State::enStay;
+		}
+		break;
+	}
+	case State::enStay:
+	{
+
+		break;
+	}
+	}
+}
+
+void ClearEventState::Exit()
+{
 }

@@ -42,9 +42,9 @@ void GameCamera::SetUp()
 void GameCamera::Update()
 {
 	// 注視点を計算
-	Vector3 target = target_->GetTransform()->m_localPosition; // 注視点の基準をプレイヤーの座標に設定
+	Vector3 target = target_->GetTransform()->m_position; // 注視点の基準をプレイヤーの座標に設定
 	target.y += TARGET_HEIGHT; 	// 少し上にあげる
-	toCameraOldPos_ = target_->GetTransform()->m_localPosition; // 前フレームのカメラの座標を保存
+	toCameraOldPos_ = target_->GetTransform()->m_position; // 前フレームのカメラの座標を保存
 
 
 	if (IsActiveCamera())
@@ -99,6 +99,19 @@ void GameCamera::Update()
 
 	// 視点を計算
 	Vector3 pos = target + transform_.m_localPosition;
+
+	// クリアイベント中なら進行度を考慮してカメラと注視点を動かす
+	if (target_->IsClearEventAction())
+	{
+		float t = target_->GetClearEventProgress();
+
+		// tに合わせて注視点を左に、カメラ位置を右・手前にずらす
+		Vector3 targetOffset = Math::Lerp(t, Vector3::Zero, Vector3(100.0f, 0.0f, 0.0f));
+		Vector3 posOffset = Math::Lerp(t, Vector3::Zero, Vector3(-200.0f, 0.0f, -100.0f));
+
+		target += targetOffset;
+		pos += posOffset;
+	}
 
 	// カメラの注視点・視点の設定
 	g_camera3D->SetTarget(target);

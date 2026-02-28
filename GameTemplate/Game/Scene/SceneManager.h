@@ -36,8 +36,20 @@ public:
 
 
 public:
+	/* 現在のシーンを取得 */
 	IScene* GetCurrentScene() { return currentScene_; }
 
+	/* クリアイベント時に必要なプレイヤーのポジション */
+	void InitClearEventPlayer(Vector3 pos, Quaternion rot,Vector3 scal) 
+	{ 
+		clearEventPlayerPos_ = pos; 
+		clearEventPlayerRot_ = rot;
+		clearEventPlayerScal_ = scal;
+	}
+
+	Vector3 GetClearEventPlayerPos() { return clearEventPlayerPos_; }
+	Quaternion GetClearEventPlayerRot() { return clearEventPlayerRot_; }
+	Vector3 GetClearEventPlayerScal() { return clearEventPlayerScal_; }
 
 private:
 	/* 次のシーンの生成・初期化処理、現在のシーンの削除 */
@@ -47,7 +59,9 @@ private:
 private:
 	IScene* currentScene_; //!< 現在のシーン
 	SceneMode nextSceneMode_ = SceneMode::None; //!< 次のシーンモード
-
+	Vector3 clearEventPlayerPos_ = Vector3::Zero; //!< クリアイベント時のプレイヤーの位置
+	Quaternion clearEventPlayerRot_ = Quaternion::Identity; // クリアイベント時のプレイヤーの回転
+	Vector3 clearEventPlayerScal_ = Vector3::Zero; // クリアイベント時のプレイヤーの大きさ
 	
 
 	/******************************************** シングルトン *****************************************************/
